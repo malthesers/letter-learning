@@ -10,7 +10,7 @@ export default defineConfig({
   plugins: [
     vue(),
     Components({}),
-    AutoImport({ imports: ['vue'], dts: './auto-imports.d.ts' })
+    AutoImport({ imports: ['vue', 'vue-router'], dts: './auto-imports.d.ts' })
   ],
   resolve: {
     alias: {
