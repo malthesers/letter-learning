@@ -1,4 +1,4 @@
-import type { Letter } from '@/interfaces/Home'
+import type { Letter, LetterPath } from '@/interfaces/Home'
 import { defineStore } from 'pinia'
 
 export const useLetterStore = defineStore('letterStore', () => {
@@ -32,8 +32,11 @@ export const useLetterStore = defineStore('letterStore', () => {
     { value: 'æ', path: 'ae' },
     { value: 'ø', path: 'oe' },
     { value: 'å', path: 'aa' }
-  ]
-  )
+  ])
 
-  return { letters }
+  function getLetterFromPath(path:LetterPath):Letter {
+    return letters.value.find(letter => letter.path === path) || letters.value[0]
+  }
+
+  return { letters, getLetterFromPath }
 })
