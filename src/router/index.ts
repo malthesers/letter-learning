@@ -10,12 +10,17 @@ const router = createRouter({
       component: HomeView
     },
     {
-      path: '/writing/:id',
+      path: '/:id',
+      name: 'letter',
+      component: () => import('../views/LetterView.vue')
+    },
+    {
+      path: '/:id/writing',
       name: 'writing',
       component: () => import('../views/WritingView.vue')
     },
     {
-      path: '/sorting/:id',
+      path: '/:id/sorting',
       name: 'sorting',
       component: () => import('../views/SortingView.vue')
     }
