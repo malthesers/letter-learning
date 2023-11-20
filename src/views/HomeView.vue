@@ -5,5 +5,5 @@
 </template>
 
 <script setup lang="ts">
-const text = ref('ypyppy')
+const text = ref('text')
 </script>
