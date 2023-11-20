@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1 class="text-5xl text-center uppercase">{{ route.params.id }}</h1>
-    <nav>
+    <nav class="text-2xl flex justify-center gap-2">
       <RouterLink to='writing'>Writing</RouterLink>
       <RouterLink to='sorting'>Sorting</RouterLink>
     </nav>
