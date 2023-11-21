@@ -31,22 +31,30 @@ const strokeWidth = ref<number>(5)
 function startDrawing(e: MouseEvent) {
   if (canvas.value && context.value) {
     isDrawing.value = true
-    context.value.beginPath()
-    context.value.moveTo(e.clientX - canvas.value.offsetLeft, e.clientY - canvas.value.offsetTop)
-    context.value.lineWidth = strokeWidth.value
-    context.value.strokeStyle = strokeColour.value
+    drawDot(e)
   }
 }
 
 function keepDrawing(e: MouseEvent) {
   if (canvas.value && context.value && isDrawing.value) {
-    context.value.lineTo(e.clientX - canvas.value.offsetLeft, e.clientY - canvas.value.offsetTop)
-    context.value.stroke()
+    drawDot(e)
   }
 }
 
 function stopDrawing() {
   isDrawing.value = false
+}
+
+function drawDot(e: MouseEvent) {
+  if (canvas.value && context.value) {
+    const x = e.clientX - canvas.value?.offsetLeft
+    const y = e.clientY - canvas.value?.offsetTop
+
+    context.value.beginPath()
+    context.value.arc(x, y, strokeWidth.value, 0, 2 * Math.PI)
+    context.value.fillStyle = strokeColour.value
+    context.value.fill()
+  }
 }
 
 onMounted(() => {
