@@ -1,10 +1,10 @@
 <template>
   <div class="h-full">
     <h1 class="text-5xl text-center uppercase">Sorting {{ letter.value }}</h1>
-    <div class="h-full grid grid-cols-3">
+    <div class="h-full grid grid-cols-3 p-4">
       <div>
         <p class="text-5xl">Items</p>
-        <draggable v-model="unsortedItems" group="items" item-key="id">
+        <draggable v-model="unsortedItems" group="items" item-key="id" class="h-full">
           <template #item="{ element }">
             <p class="text-4xl">{{ element.name }}</p>
           </template>
@@ -12,7 +12,7 @@
       </div>
       <div>
         <p class="text-5xl">Good</p>
-        <draggable v-model="goodItems" group="items" item-key="id">
+        <draggable v-model="goodItems" group="items" item-key="id" class="h-full">
           <template #item="{ element }">
             <p class="text-4xl">{{ element.name }}</p>
           </template>
@@ -20,7 +20,7 @@
       </div>
       <div>
         <p class="text-5xl">Bad</p>
-        <draggable v-model="badItems" group="items" item-key="id">
+        <draggable v-model="badItems" group="items" item-key="id" class="h-full">
           <template #item="{ element }">
             <p class="text-4xl">{{ element.name }}</p>
           </template>
