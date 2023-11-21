@@ -1,16 +1,16 @@
 <template>
   <div>
     <h1 class="text-5xl text-center uppercase">Canvas {{ letter.value }}</h1>
-    <!-- <VueDrawingCanvas ref="VueCanvasDrawing" width="1000" height="1000" /> -->
-    <canvas ref="canvas" width="500" height="500" @mousedown="startDrawing" @mousemove="keepDrawing"
-      @mouseup="stopDrawing"></canvas>
+    <div class="grid place-content-center">
+      <canvas ref="canvas" width="2600" height="1400" class="bg-white" @mousedown="startDrawing" @mousemove="keepDrawing"
+        @mouseup="stopDrawing"></canvas>
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import type { Letter, LetterPath } from '@/interfaces/Home';
 import { useLetterStore } from '@/stores/letterStore';
-import VueDrawingCanvas from 'vue-drawing-canvas'
 
 const letterStore = useLetterStore()
 const router = useRouter()
@@ -20,6 +20,7 @@ const letter: Letter = letterStore.getLetterFromPath(route.params.id as LetterPa
 const isDrawing = ref<boolean>(false)
 const canvas = ref<HTMLCanvasElement | null>(null)
 const context = ref<CanvasRenderingContext2D | null>(null)
+const strokeWidth: number = 5
 
 
 function startDrawing(e: MouseEvent) {
@@ -27,6 +28,7 @@ function startDrawing(e: MouseEvent) {
     isDrawing.value = true
     context.value.beginPath()
     context.value.moveTo(e.clientX - canvas.value.offsetLeft, e.clientY - canvas.value.offsetTop)
+    context.value.lineWidth = strokeWidth
   }
 }
 
@@ -42,12 +44,8 @@ function stopDrawing(e: MouseEvent) {
 }
 
 onMounted(() => {
-  if (canvas.value) context.value = canvas.value?.getContext('2d')
+  if (canvas.value) {
+    context.value = canvas.value?.getContext('2d')
+  }
 })
 </script>
-
-<style scoped>
-canvas {
-  background-color: white;
-}
-</style>
