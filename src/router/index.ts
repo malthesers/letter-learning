@@ -23,6 +23,11 @@ const router = createRouter({
       path: '/:id/sorting',
       name: 'sorting',
       component: () => import('../views/SortingView.vue')
+    },
+    {
+      path: '/:id/canvas',
+      name: 'canvas',
+      component: () => import('../views/CanvasView.vue')
     }
   ]
 })

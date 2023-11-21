@@ -1,11 +1,6 @@
 <template>
   <div>
-    <h1 class="text-5xl text-center uppercase">{{ letter.value }}</h1>
-    <nav class="text-2xl flex justify-center gap-2">
-      <RouterLink :to="route.params.id + '/writing'">Writing</RouterLink>
-      <RouterLink :to="route.params.id + '/sorting'">Sorting</RouterLink>
-      <RouterLink :to="route.params.id + '/canvas'">Canvas</RouterLink>
-    </nav>
+    <h1 class="text-5xl text-center uppercase">Canvas {{ letter.value }}</h1>
   </div>
 </template>
 
