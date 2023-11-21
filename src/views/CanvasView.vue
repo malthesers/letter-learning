@@ -1,9 +1,9 @@
 <template>
   <div>
     <h1 class="text-5xl text-center uppercase">Canvas {{ letter.value }}</h1>
-    <div class="flex gap-4 p-4">
+    <div class="flex gap-4 p-4 text-black">
       <input v-model="strokeColour" type="color">
-      <input v-model="strokeWidth" type="number">
+      <input v-model="strokeWidth" type="number" class="p-2">
     </div>
     <div class="grid place-content-center">
       <canvas ref="canvas" width="2600" height="1400" class="bg-white" @mousedown="startDrawing" @mousemove="keepDrawing"
@@ -24,37 +24,31 @@ const letter: Letter = letterStore.getLetterFromPath(route.params.id as LetterPa
 const isDrawing = ref<boolean>(false)
 const canvas = ref<HTMLCanvasElement | null>(null)
 const context = ref<CanvasRenderingContext2D | null>(null)
-const strokeColour = ref<string>('black')
-const strokeWidth = ref<number>(5)
+const strokeColour = ref<string>('#000000')
+const strokeWidth = ref<number>(20)
 
 
 function startDrawing(e: MouseEvent) {
   if (canvas.value && context.value) {
     isDrawing.value = true
-    drawDot(e)
+    context.value.beginPath()
+    context.value.moveTo(e.clientX - canvas.value.offsetLeft, e.clientY - canvas.value.offsetTop)
+    context.value.strokeStyle = strokeColour.value
+    context.value.lineWidth = strokeWidth.value
+    context.value.lineCap = 'round'
+    context.value.lineJoin = 'round'
   }
 }
 
 function keepDrawing(e: MouseEvent) {
   if (canvas.value && context.value && isDrawing.value) {
-    drawDot(e)
+    context.value.lineTo(e.clientX - canvas.value.offsetLeft, e.clientY - canvas.value.offsetTop)
+    context.value.stroke()
   }
 }
 
 function stopDrawing() {
   isDrawing.value = false
-}
-
-function drawDot(e: MouseEvent) {
-  if (canvas.value && context.value) {
-    const x = e.clientX - canvas.value?.offsetLeft
-    const y = e.clientY - canvas.value?.offsetTop
-
-    context.value.beginPath()
-    context.value.arc(x, y, strokeWidth.value, 0, 2 * Math.PI)
-    context.value.fillStyle = strokeColour.value
-    context.value.fill()
-  }
 }
 
 onMounted(() => {
