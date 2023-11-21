@@ -1,6 +1,10 @@
 <template>
   <div>
     <h1 class="text-5xl text-center uppercase">Canvas {{ letter.value }}</h1>
+    <div class="flex gap-4 p-4">
+      <input v-model="strokeColour" type="color">
+      <input v-model="strokeWidth" type="number">
+    </div>
     <div class="grid place-content-center">
       <canvas ref="canvas" width="2600" height="1400" class="bg-white" @mousedown="startDrawing" @mousemove="keepDrawing"
         @mouseup="stopDrawing"></canvas>
@@ -20,7 +24,8 @@ const letter: Letter = letterStore.getLetterFromPath(route.params.id as LetterPa
 const isDrawing = ref<boolean>(false)
 const canvas = ref<HTMLCanvasElement | null>(null)
 const context = ref<CanvasRenderingContext2D | null>(null)
-const strokeWidth: number = 5
+const strokeColour = ref<string>('black')
+const strokeWidth = ref<number>(5)
 
 
 function startDrawing(e: MouseEvent) {
@@ -28,7 +33,8 @@ function startDrawing(e: MouseEvent) {
     isDrawing.value = true
     context.value.beginPath()
     context.value.moveTo(e.clientX - canvas.value.offsetLeft, e.clientY - canvas.value.offsetTop)
-    context.value.lineWidth = strokeWidth
+    context.value.lineWidth = strokeWidth.value
+    context.value.strokeStyle = strokeColour.value
   }
 }
 
@@ -39,7 +45,7 @@ function keepDrawing(e: MouseEvent) {
   }
 }
 
-function stopDrawing(e: MouseEvent) {
+function stopDrawing() {
   isDrawing.value = false
 }
 
