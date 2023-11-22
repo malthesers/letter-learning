@@ -3,8 +3,9 @@
     <div class="grid">
       <div class="z-10 flex gap-4 p-4">
         <label v-for="colour in strokeColours" :key="colour" :for="colour" :class="`bg-${colour}`"
-          class="w-20 h-20 rounded-full">
-          <input v-model="strokeColour" type="radio" :id="colour" :value="colour" class="w-0 h-0 opacity-0">
+          class="w-16 h-16 grid place-content-center rounded-full">
+          <input v-model="strokeColour" type="radio" :id="colour" :value="colour" class="w-0 h-0 opacity-0 peer">
+          <div class="w-0 bg-white aspect-square rounded-full duration-200 peer-checked:w-8"></div>
         </label>
       </div>
       <div class="w-full h-full grid place-content-center overflow-hidden">
@@ -19,6 +20,12 @@
 import type { Letter, LetterPath } from '@/interfaces/Home';
 import { useLetterStore } from '@/stores/letterStore';
 
+interface Colours {
+  black: string,
+  red: string,
+  blue: string
+}
+
 const letterStore = useLetterStore()
 const router = useRouter()
 const route = useRoute()
@@ -27,10 +34,14 @@ const letter: Letter = letterStore.getLetterFromPath(route.params.id as LetterPa
 const isDrawing = ref<boolean>(false)
 const canvas = ref<HTMLCanvasElement | null>(null)
 const context = ref<CanvasRenderingContext2D | null>(null)
-const strokeColour = ref<string>('black')
 const strokeWidth = ref<number>(10)
-
+const strokeColour = ref<string>('black')
 const strokeColours = ref(['black', 'blue', 'red'])
+const strokeColoursMap = ref<Colours>({
+  black: '#000000',
+  red: '#EC4233',
+  blue: '#4285F6'
+})
 
 
 function startDrawing(e: MouseEvent) {
@@ -38,7 +49,7 @@ function startDrawing(e: MouseEvent) {
     isDrawing.value = true
     context.value.beginPath()
     context.value.moveTo(e.clientX - canvas.value.offsetLeft, e.clientY - canvas.value.offsetTop)
-    context.value.strokeStyle = strokeColour.value
+    context.value.strokeStyle = strokeColoursMap.value[strokeColour.value as keyof Colours]
     context.value.lineWidth = strokeWidth.value
     context.value.lineCap = 'round'
     context.value.lineJoin = 'round'
