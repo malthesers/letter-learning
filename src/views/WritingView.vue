@@ -5,10 +5,7 @@
 </template>
 
 <script setup lang="ts">
-import type { Letter, LetterPath } from '@/interfaces/Home';
 import { useLetterStore } from '@/stores/letterStore';
 
 const letterStore = useLetterStore()
-const router = useRouter()
-const route = useRoute()
 </script>

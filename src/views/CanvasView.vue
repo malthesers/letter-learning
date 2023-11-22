@@ -18,7 +18,6 @@
 </template>
 
 <script setup lang="ts">
-import type { Letter, LetterPath } from '@/interfaces/Home';
 import { useLetterStore } from '@/stores/letterStore';
 
 interface Colours {
@@ -28,8 +27,6 @@ interface Colours {
 }
 
 const letterStore = useLetterStore()
-const router = useRouter()
-const route = useRoute()
 
 const isDrawing = ref<boolean>(false)
 const canvas = ref<HTMLCanvasElement | null>(null)

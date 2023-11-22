@@ -35,8 +35,6 @@ import { useLetterStore } from '@/stores/letterStore';
 import draggable from 'vuedraggable'
 
 const letterStore = useLetterStore()
-const router = useRouter()
-const route = useRoute()
 
 const unsortedItems = ref<{ name: string }[]>([{ name: 'milk' }, { name: 'cookies' }, { name: 'tea' }, { name: 'cake' }])
 const goodItems = ref<{ name: string }[]>([])
