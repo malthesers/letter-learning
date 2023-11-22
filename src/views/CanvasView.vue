@@ -35,7 +35,7 @@ const canvas = ref<HTMLCanvasElement | null>(null)
 const context = ref<CanvasRenderingContext2D | null>(null)
 const strokeWidth = ref<number>(10)
 const strokeColour = ref<string>('black')
-const strokeColours = ref(['black', 'blue', 'red'])
+const strokeColours = ref<(keyof Colours)[]>(['black', 'blue', 'red'])
 const strokeColoursMap = ref<Colours>({
   black: '#000000',
   red: '#EC4233',
