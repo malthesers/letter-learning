@@ -50,8 +50,8 @@ function startDrawing(e: MouseEvent) {
     context.value.moveTo(e.clientX - canvas.value.offsetLeft, e.clientY - canvas.value.offsetTop)
     context.value.strokeStyle = strokeColoursMap.value[strokeColour.value as keyof Colours]
     context.value.lineWidth = strokeWidth.value
-    context.value.lineCap = 'round'
     context.value.lineJoin = 'round'
+    context.value.lineCap = 'round'
   }
 }
 

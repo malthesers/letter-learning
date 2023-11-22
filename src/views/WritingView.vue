@@ -1,6 +1,6 @@
 <template>
   <main>
-    <h1 class="text-5xl text-center uppercase">Writing {{ letterStore.current }}</h1>
+    <h1 class="text-5xl text-center uppercase">Writing {{ letterStore.current?.value }}</h1>
   </main>
 </template>
 
