@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <main>
     <h1 class="text-5xl text-center uppercase">Writing {{ letter.value }}</h1>
-  </div>
+  </main>
 </template>
 
 <script setup lang="ts">

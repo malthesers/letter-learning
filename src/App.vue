@@ -1,8 +1,6 @@
 <template>
   <TheHeader />
-  <section class="h-full p-4 pt-16">
-    <RouterView />
-  </section>
+  <RouterView />
 </template>
 
 <script setup lang="ts">

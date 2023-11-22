@@ -1,16 +1,18 @@
 <template>
-  <div>
-    <div class="grid grid-cols-1 grid-rows-1">
+  <main>
+    <div class="grid">
       <div class="z-10 flex gap-4 p-4">
         <label v-for="colour in strokeColours" :key="colour" :for="colour" :class="`bg-${colour}`"
           class="w-20 h-20 rounded-full">
           <input v-model="strokeColour" type="radio" :id="colour" :value="colour" class="w-0 h-0 opacity-0">
         </label>
       </div>
-      <canvas ref="canvas" width="2600" height="1400" class="bg-white place-self-center" @mousedown="startDrawing"
-        @mousemove="keepDrawing" @mouseup="stopDrawing"></canvas>
+      <div class="w-full h-full grid place-content-center overflow-hidden">
+        <canvas ref="canvas" width="2600" height="1400" class="bg-white place-self-center" @mousedown="startDrawing"
+          @mousemove="keepDrawing" @mouseup="stopDrawing"></canvas>
+      </div>
     </div>
-  </div>
+  </main>
 </template>
 
 <script setup lang="ts">

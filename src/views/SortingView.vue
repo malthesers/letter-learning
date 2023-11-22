@@ -1,5 +1,5 @@
 <template>
-  <div class="h-full">
+  <main>
     <h1 class="text-5xl text-center uppercase">Sorting {{ letter.value }}</h1>
     <div class="h-full grid grid-cols-3 p-4">
       <div>
@@ -27,7 +27,7 @@
         </draggable>
       </div>
     </div>
-  </div>
+  </main>
 </template>
 
 <script setup lang="ts">
