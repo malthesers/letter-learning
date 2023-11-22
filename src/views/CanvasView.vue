@@ -1,13 +1,14 @@
 <template>
   <div>
-    <h1 class="text-5xl text-center uppercase">Canvas {{ letter.value }}</h1>
-    <div class="flex gap-4 p-4 text-black">
-      <input v-model="strokeColour" type="color">
-      <input v-model="strokeWidth" type="number" class="p-2">
-    </div>
-    <div class="grid place-content-center">
-      <canvas ref="canvas" width="2600" height="1400" class="bg-white" @mousedown="startDrawing" @mousemove="keepDrawing"
-        @mouseup="stopDrawing"></canvas>
+    <div class="grid grid-cols-1 grid-rows-1">
+      <div class="z-10 flex gap-4 p-4">
+        <label v-for="colour in strokeColours" :key="colour" :for="colour" :class="`bg-${colour}`"
+          class="w-20 h-20 rounded-full">
+          <input v-model="strokeColour" type="radio" :id="colour" :value="colour" class="w-0 h-0 opacity-0">
+        </label>
+      </div>
+      <canvas ref="canvas" width="2600" height="1400" class="bg-white place-self-center" @mousedown="startDrawing"
+        @mousemove="keepDrawing" @mouseup="stopDrawing"></canvas>
     </div>
   </div>
 </template>
@@ -24,8 +25,10 @@ const letter: Letter = letterStore.getLetterFromPath(route.params.id as LetterPa
 const isDrawing = ref<boolean>(false)
 const canvas = ref<HTMLCanvasElement | null>(null)
 const context = ref<CanvasRenderingContext2D | null>(null)
-const strokeColour = ref<string>('#000000')
-const strokeWidth = ref<number>(20)
+const strokeColour = ref<string>('black')
+const strokeWidth = ref<number>(10)
+
+const strokeColours = ref(['black', 'blue', 'red'])
 
 
 function startDrawing(e: MouseEvent) {
