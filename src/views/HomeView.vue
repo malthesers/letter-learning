@@ -12,7 +12,6 @@
 </template>
 
 <script setup lang="ts">
-import type { Letter } from '@/interfaces/Home';
 import { useLetterStore } from '@/stores/letterStore';
 
 const letterStore = useLetterStore()

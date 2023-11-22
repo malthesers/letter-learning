@@ -1,6 +1,6 @@
 <template>
   <main>
-    <h1 class="text-5xl text-center uppercase">Sorting {{ letterStore.current }}</h1>
+    <h1 class="text-5xl text-center uppercase">Sorting {{ letterStore.current?.value }}</h1>
     <div class="h-full grid grid-cols-3 p-4">
       <div>
         <p class="text-5xl">Items</p>
