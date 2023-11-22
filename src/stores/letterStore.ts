@@ -37,8 +37,8 @@ export const useLetterStore = defineStore('letterStore', () => {
     { value: 'å', path: 'aa' }
   ])
 
-  const current = computed<Letter>(() => {
-    return letters.value.find(letter => letter.path === route.params.id).value || letters.value[0]
+  const current = computed<(Letter | null)>(() => {
+    return letters.value.find(letter => letter.path === route.params.id)
   })
 
   return { letters, current }
