@@ -8,6 +8,8 @@
           <div class="w-8 bg-white aspect-square rounded-full duration-200 transform scale-0 peer-checked:scale-100">
           </div>
         </label>
+        <button @click="clearDrawing"
+          class="w-20 h-20 text-5xl duration-200 hover:-rotate-12 active:scale-90">🗑️</button>
       </div>
       <div class="w-full h-full grid place-content-center overflow-hidden">
         <canvas ref="canvas" width="2600" height="1400" class="bg-white place-self-center" @mousedown="startDrawing"
@@ -62,6 +64,12 @@ function keepDrawing(e: MouseEvent) {
 
 function stopDrawing() {
   isDrawing.value = false
+}
+
+function clearDrawing() {
+  if (canvas.value && context.value) {
+    context.value.clearRect(0, 0, canvas.value.width, canvas.value.height)
+  }
 }
 
 onMounted(() => {
