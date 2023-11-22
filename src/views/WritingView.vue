@@ -1,6 +1,6 @@
 <template>
   <main>
-    <h1 class="text-5xl text-center uppercase">Writing {{ letter.value }}</h1>
+    <h1 class="text-5xl text-center uppercase">Writing {{ letterStore.current }}</h1>
   </main>
 </template>
 
@@ -11,6 +11,4 @@ import { useLetterStore } from '@/stores/letterStore';
 const letterStore = useLetterStore()
 const router = useRouter()
 const route = useRoute()
-
-const letter: Letter = letterStore.getLetterFromPath(route.params.id as LetterPath)
 </script>

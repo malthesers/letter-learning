@@ -1,6 +1,6 @@
 <template>
   <main>
-    <h1 class="text-5xl text-center uppercase">Sorting {{ letter.value }}</h1>
+    <h1 class="text-5xl text-center uppercase">Sorting {{ letterStore.current }}</h1>
     <div class="h-full grid grid-cols-3 p-4">
       <div>
         <p class="text-5xl">Items</p>
@@ -31,15 +31,12 @@
 </template>
 
 <script setup lang="ts">
-import type { Letter, LetterPath } from '@/interfaces/Home';
 import { useLetterStore } from '@/stores/letterStore';
 import draggable from 'vuedraggable'
 
 const letterStore = useLetterStore()
 const router = useRouter()
 const route = useRoute()
-
-const letter: Letter = letterStore.getLetterFromPath(route.params.id as LetterPath)
 
 const unsortedItems = ref<{ name: string }[]>([{ name: 'milk' }, { name: 'cookies' }, { name: 'tea' }, { name: 'cake' }])
 const goodItems = ref<{ name: string }[]>([])

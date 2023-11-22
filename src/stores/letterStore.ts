@@ -2,6 +2,9 @@ import type { Letter, LetterPath } from '@/interfaces/Home'
 import { defineStore } from 'pinia'
 
 export const useLetterStore = defineStore('letterStore', () => {
+  const router = useRouter()
+  const route = useRoute()
+
   const letters = ref<Letter[]>([
     { value: 'a', path: 'a' },
     { value: 'b', path: 'b' },
@@ -34,9 +37,9 @@ export const useLetterStore = defineStore('letterStore', () => {
     { value: 'å', path: 'aa' }
   ])
 
-  function getLetterFromPath(path:LetterPath):Letter {
-    return letters.value.find(letter => letter.path === path) || letters.value[0]
-  }
+  const current = computed<Letter>(() => {
+    return letters.value.find(letter => letter.path === route.params.id).value || letters.value[0]
+  })
 
-  return { letters, getLetterFromPath }
+  return { letters, current }
 })

@@ -1,9 +1,9 @@
 <template>
   <main>
     <div class="grid grid-cols-1 grid-rows-1 [&>*]:grid-area">
-      <div :class="isDrawing && 'pointer-events-none'" class="z-10 w-min h-min p-4 flex flex-row gap-4">
+      <div :class="isDrawing && 'pointer-events-none'" class="z-10 w-min h-min p-4 flex flex-row">
         <label v-for="colour in strokeColours" :key="colour" :for="colour" :class="`bg-${colour}`"
-          class="w-16 h-16 grid place-content-center rounded-full cursor-pointer">
+          class="w-20 h-20 border-8 border-white grid place-content-center rounded-full cursor-pointer">
           <input v-model="strokeColour" type="radio" :id="colour" :value="colour" class="w-0 h-0 opacity-0 peer">
           <div class="w-8 bg-white aspect-square rounded-full duration-200 transform scale-0 peer-checked:scale-100">
           </div>
@@ -30,7 +30,6 @@ interface Colours {
 const letterStore = useLetterStore()
 const router = useRouter()
 const route = useRoute()
-const letter: Letter = letterStore.getLetterFromPath(route.params.id as LetterPath)
 
 const isDrawing = ref<boolean>(false)
 const canvas = ref<HTMLCanvasElement | null>(null)
