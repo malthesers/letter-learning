@@ -13,6 +13,5 @@
 import { useLetterStore } from '@/stores/letterStore';
 
 const letterStore = useLetterStore()
-const router = useRouter()
 const route = useRoute()
 </script>

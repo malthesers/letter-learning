@@ -1,8 +1,7 @@
-import type { Letter, LetterPath } from '@/interfaces/Home'
+import type { Letter } from '@/interfaces/Home'
 import { defineStore } from 'pinia'
 
 export const useLetterStore = defineStore('letterStore', () => {
-  const router = useRouter()
   const route = useRoute()
 
   const letters = ref<Letter[]>([

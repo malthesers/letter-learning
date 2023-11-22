@@ -10,6 +10,9 @@
         </label>
         <button @click="clearDrawing"
           class="w-20 h-20 text-5xl duration-200 hover:-rotate-12 active:scale-90">🗑️</button>
+        <p class="w-20 h-20 text-6xl text-black font-bold uppercase grid place-content-center">
+          <span>{{ letterStore.current?.value }}</span>
+        </p>
       </div>
       <div class="w-full h-full grid place-content-center overflow-hidden">
         <canvas ref="canvas" width="2600" height="1400" class="bg-white place-self-center" @mousedown="startDrawing"
