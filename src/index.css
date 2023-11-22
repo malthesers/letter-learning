@@ -7,3 +7,9 @@
     @apply h-full pt-16;
   }
 }
+
+@layer utilities {
+  .grid-area {
+    grid-area: 1 / 1 / 1 / 1;
+  }
+}

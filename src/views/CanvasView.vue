@@ -1,11 +1,12 @@
 <template>
   <main>
-    <div class="grid">
-      <div class="z-10 flex gap-4 p-4">
+    <div class="grid grid-cols-1 grid-rows-1 [&>*]:grid-area">
+      <div class="z-10 w-min h-min p-4 flex flex-row gap-4">
         <label v-for="colour in strokeColours" :key="colour" :for="colour" :class="`bg-${colour}`"
-          class="w-16 h-16 grid place-content-center rounded-full">
+          class="w-16 h-16 grid place-content-center rounded-full cursor-pointer">
           <input v-model="strokeColour" type="radio" :id="colour" :value="colour" class="w-0 h-0 opacity-0 peer">
-          <div class="w-0 bg-white aspect-square rounded-full duration-200 peer-checked:w-8"></div>
+          <div class="w-8 bg-white aspect-square rounded-full duration-200 transform scale-0 peer-checked:scale-100">
+          </div>
         </label>
       </div>
       <div class="w-full h-full grid place-content-center overflow-hidden">
