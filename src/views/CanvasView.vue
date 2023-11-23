@@ -32,22 +32,33 @@ const isDrawing = ref<boolean>(false)
 const canvas = ref<HTMLCanvasElement | null>(null)
 const context = ref<CanvasRenderingContext2D | null>(null)
 
-const strokeColours = ref<string[]>(['#000000', '#4285F6', '#EC4233', '#F9BE04', '#33A955', '#AF52DE', '#FF9501'])
-const strokeColour = ref<string>('#000000')
 const strokeWidth = ref<number>(10)
+const strokeColour = ref<string>('#000000')
+const strokeColours = ref<string[]>([
+  '#000000',  // black
+  '#4285F6',  // blue
+  '#EC4233',  // red
+  '#F9BE04',  // yellow
+  '#33A955',  // green
+  '#AF52DE',  // purple
+  '#FF9501'   // orange
+])
 
 
 function startDrawing(e: MouseEvent) {
   if (canvas.value && context.value) {
-    const [x, y] = getCoords(e)
 
+    // Set drawing boolean to true
     isDrawing.value = true
 
+    // Apply drawing styling
     context.value.strokeStyle = strokeColour.value
     context.value.lineWidth = strokeWidth.value
     context.value.lineJoin = 'round'
     context.value.lineCap = 'round'
 
+    // Start drawing from cursor coordinates
+    const [x, y] = getCoords(e)
     context.value.moveTo(x, y)
     draw(e)
   }
@@ -57,6 +68,7 @@ function draw(e: MouseEvent) {
   if (canvas.value && context.value && isDrawing.value) {
     const [x, y] = getCoords(e)
 
+    // Continue drawing line to new coordinates
     context.value.lineTo(x, y)
     context.value.stroke()
     context.value.beginPath()
@@ -66,17 +78,20 @@ function draw(e: MouseEvent) {
 
 function stopDrawing() {
   if (canvas.value && context.value && isDrawing.value) {
+    // Set drawing boolean to false
     isDrawing.value = false
   }
 }
 
 function clearDrawing() {
   if (canvas.value && context.value) {
+    // Clear canvas
     context.value.clearRect(0, 0, canvas.value.width, canvas.value.height)
   }
 }
 
 function getCoords(e: MouseEvent) {
+  // Return destructured coordinates [x, y]
   return canvas.value ? [
     e.clientX - canvas.value.offsetLeft,
     e.clientY - canvas.value.offsetTop
