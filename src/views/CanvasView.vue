@@ -2,6 +2,10 @@
   <main>
     <div class="grid grid-cols-1 grid-rows-1 [&>*]:grid-area">
       <div :class="isDrawing && 'pointer-events-none'" class="z-10 w-min h-min p-4 flex flex-row">
+        <p :class="[letterStore.isVowel ? 'text-red' : 'text-blue']" class="flex flex-row gap-2 text-6xl font-bold">
+          <span class="uppercase">{{ letterStore.current?.value }}</span>
+          <span class="lowercase">{{ letterStore.current?.value }}</span>
+        </p>
         <label v-for="colour in strokeColours" :key="colour" :for="colour" :class="`bg-${colour}`"
           class="w-20 h-20 border-8 border-white grid place-content-center rounded-full cursor-pointer">
           <input v-model="strokeColour" type="radio" :id="colour" :value="colour" class="w-0 h-0 opacity-0 peer">
@@ -10,9 +14,6 @@
         </label>
         <button @click="clearDrawing"
           class="w-20 h-20 text-5xl duration-200 hover:-rotate-12 active:scale-90">🗑️</button>
-        <p class="w-20 h-20 text-6xl text-black font-bold uppercase grid place-content-center">
-          <span>{{ letterStore.current?.value }}</span>
-        </p>
       </div>
       <div class="w-full h-full grid place-content-center overflow-hidden">
         <canvas ref="canvas" width="2600" height="1400" class="bg-white place-self-center" @mousedown="startDrawing"
@@ -23,6 +24,7 @@
 </template>
 
 <script setup lang="ts">
+import type { Consonant } from '@/interfaces/Letters';
 import { useLetterStore } from '@/stores/letterStore';
 
 interface Colours {
