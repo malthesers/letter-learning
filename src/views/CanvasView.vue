@@ -33,7 +33,7 @@ const canvas = ref<HTMLCanvasElement | null>(null)
 const context = ref<CanvasRenderingContext2D | null>(null)
 const strokeWidth = ref<number>(10)
 const strokeColour = ref<string>('#000000')
-const strokeColours = ref<string[]>(['#000000', '#4285F6', '#EC4233'])
+const strokeColours = ref<string[]>(['#000000', '#4285F6', '#EC4233', '#F9BE04', '#33A955', '#AF52DE', '#FF9501'])
 
 
 function startDrawing(e: MouseEvent) {
