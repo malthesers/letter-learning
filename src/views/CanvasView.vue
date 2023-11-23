@@ -39,22 +39,28 @@ const strokeWidth = ref<number>(10)
 
 function startDrawing(e: MouseEvent) {
   if (canvas.value && context.value) {
+    const coords = getCoords(e)
+
     isDrawing.value = true
-    context.value.moveTo(e.clientX - canvas.value.offsetLeft, e.clientY - canvas.value.offsetTop)
+
     context.value.strokeStyle = strokeColour.value
     context.value.lineWidth = strokeWidth.value
     context.value.lineJoin = 'round'
     context.value.lineCap = 'round'
+
+    context.value.moveTo(coords.x, coords.y)
     draw(e)
   }
 }
 
 function draw(e: MouseEvent) {
   if (canvas.value && context.value && isDrawing.value) {
-    context.value.lineTo(e.clientX - canvas.value.offsetLeft, e.clientY - canvas.value.offsetTop)
+    const coords = getCoords(e)
+
+    context.value.lineTo(coords.x, coords.y)
     context.value.stroke()
     context.value.beginPath()
-    context.value.moveTo(e.clientX - canvas.value.offsetLeft, e.clientY - canvas.value.offsetTop)
+    context.value.moveTo(coords.x, coords.y)
   }
 }
 
@@ -68,6 +74,13 @@ function clearDrawing() {
   if (canvas.value && context.value) {
     context.value.clearRect(0, 0, canvas.value.width, canvas.value.height)
   }
+}
+
+function getCoords(e: MouseEvent) {
+  return canvas.value ? {
+    x: e.clientX - canvas.value.offsetLeft,
+    y: e.clientY - canvas.value.offsetTop
+  } : { x: 0, y: 0 }
 }
 
 onMounted(() => {
