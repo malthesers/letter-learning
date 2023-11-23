@@ -31,11 +31,10 @@ const letterStore = useLetterStore()
 const isDrawing = ref<boolean>(false)
 const canvas = ref<HTMLCanvasElement | null>(null)
 const context = ref<CanvasRenderingContext2D | null>(null)
-const drawingData = ref<any[]>([])
 
-const strokeWidth = ref<number>(10)
-const strokeColour = ref<string>('#000000')
 const strokeColours = ref<string[]>(['#000000', '#4285F6', '#EC4233', '#F9BE04', '#33A955', '#AF52DE', '#FF9501'])
+const strokeColour = ref<string>('#000000')
+const strokeWidth = ref<number>(10)
 
 
 function startDrawing(e: MouseEvent) {
@@ -60,7 +59,9 @@ function draw(e: MouseEvent) {
 }
 
 function stopDrawing() {
-  isDrawing.value = false
+  if (canvas.value && context.value && isDrawing.value) {
+    isDrawing.value = false
+  }
 }
 
 function clearDrawing() {
