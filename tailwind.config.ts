@@ -5,14 +5,9 @@ module.exports = {
     extend: {
       colors: {
         'red': '#EC4233',
-        'blue': '#4285F6'
+        'blue': '#4285F6',
       }
     }
   },
-  safelist: [
-    'bg-black',
-    'bg-red',
-    'bg-blue'
-  ],
   plugins: []
 }
