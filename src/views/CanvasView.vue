@@ -96,7 +96,8 @@ function stopDrawing() {
 function clearDrawing() {
   if (canvas.value && context.value) {
     // Clear canvas
-    context.value.clearRect(0, 0, canvas.value.width, canvas.value.height)
+    context.value.fillStyle = 'white';
+    context.value.fillRect(0, 0, canvas.value.width, canvas.value.height);
   }
 }
 
