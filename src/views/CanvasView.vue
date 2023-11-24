@@ -6,6 +6,10 @@
           <span class="uppercase">{{ letterStore.current?.value }}</span>
           <span class="lowercase">{{ letterStore.current?.value }}</span>
         </p>
+        <button @click="tool = 'brush'"
+          class="w-16 h-16 text-5xl duration-200 hover:-rotate-12 active:scale-90">🖌️</button>
+        <button @click="tool = 'bucket'"
+          class="w-16 h-16 text-5xl duration-200 hover:-rotate-12 active:scale-90">🎨</button>
         <button @click="clearDrawing"
           class="w-16 h-16 text-5xl duration-200 hover:-rotate-12 active:scale-90">🗑️</button>
         <label v-for="colour in strokeColours" :key="colour" :for="colour" :style="{ backgroundColor: colour }"
@@ -32,6 +36,9 @@ const isDrawing = ref<boolean>(false)
 const canvas = ref<HTMLCanvasElement | null>(null)
 const context = ref<CanvasRenderingContext2D | null>(null)
 
+const tool = ref<'brush' | 'bucket'>('brush')
+const imageData = ref<ImageData | null>(null)
+
 const strokeWidth = ref<number>(10)
 const strokeColour = ref<string>('#000000')
 const strokeColours = ref<string[]>([
@@ -44,9 +51,8 @@ const strokeColours = ref<string[]>([
   '#FF9501'   // orange
 ])
 
-
 function startDrawing(e: MouseEvent) {
-  if (canvas.value && context.value) {
+  if (canvas.value && context.value && tool.value === 'brush') {
 
     // Set drawing boolean to true
     isDrawing.value = true
@@ -61,6 +67,10 @@ function startDrawing(e: MouseEvent) {
     const [x, y] = getCoords(e)
     context.value.moveTo(x, y)
     draw(e)
+  }
+
+  if (tool.value === 'bucket') {
+    fill(e)
   }
 }
 
@@ -90,7 +100,7 @@ function clearDrawing() {
   }
 }
 
-function getCoords(e: MouseEvent) {
+function getCoords(e: MouseEvent): number[] {
   // Return destructured coordinates [x, y]
   return canvas.value ? [
     e.clientX - canvas.value.offsetLeft,
@@ -98,9 +108,84 @@ function getCoords(e: MouseEvent) {
   ] : [0, 0]
 }
 
+function fill(e: MouseEvent) {
+  if (canvas.value && context.value) {
+    imageData.value = context.value.getImageData(0, 0, canvas.value.width, canvas.value.height)
+    const [x, y] = getCoords(e)
+    const targetColour = getColour(x, y)
+    const fillColour = toRGB(strokeColour.value)
+
+    if (targetColour !== fillColour) {
+      floodFill(x, y, targetColour, fillColour)
+    }
+  }
+}
+
+function floodFill(x: number, y: number, targetColour: string, fillColour: string) {
+  if (canvas.value && context.value && imageData.value) {
+    const stack: [number, number][] = [[x, y]]
+
+    while (stack.length > 0) {
+      const [currentX, currentY] = stack.pop() || [0, 0]
+
+      if (currentX >= 0 && currentX < canvas.value.width && currentY >= 0 && currentY < canvas.value.height) {
+        const currentColour = getColour(currentX, currentY)
+
+        if (currentColour === targetColour) {
+          setColour(currentX, currentY, fillColour)
+
+          stack.push(
+            [currentX + 1, currentY],
+            [currentX - 1, currentY],
+            [currentX, currentY + 1],
+            [currentX, currentY - 1],
+          )
+        }
+      }
+    }
+
+    context.value.putImageData(imageData.value, 0, 0)
+  }
+}
+
+function setColour(x: number, y: number, colour: string) {
+  if (context.value && imageData.value) {
+    const index = (y * imageData.value.width + x) * 4;
+    const [r, g, b] = (colour.match(/\d+/g) || []).map(Number)
+
+    imageData.value.data[index] = r
+    imageData.value.data[index + 1] = g
+    imageData.value.data[index + 2] = b
+    imageData.value.data[index + 3] = 255
+  }
+}
+
+function getColour(x: number, y: number): string {
+  if (imageData.value) {
+    const index = (y * imageData.value.width + x) * 4;
+    const r = imageData.value.data[index];
+    const g = imageData.value.data[index + 1];
+    const b = imageData.value.data[index + 2];
+    return `rgb(${r}, ${g}, ${b})`;
+  } else {
+    return ''
+  }
+}
+
+function toRGB(colour: string) {
+  const { style } = new Option()
+  style.color = colour
+  return style.color
+}
+
 onMounted(() => {
   if (canvas.value) {
-    context.value = canvas.value?.getContext('2d')
+    context.value = canvas.value.getContext('2d', { willReadFrequently: true })
+
+    if (context.value) {
+      context.value.fillStyle = 'white';
+      context.value.fillRect(0, 0, canvas.value.width, canvas.value.height);
+    }
   }
 })
 </script>
