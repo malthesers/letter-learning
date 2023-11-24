@@ -1,5 +1,6 @@
 <template>
   <main class="select-none">
+    <StrokeCursor :cursorCoords="cursorCoords" :strokeColour="strokeColour" :strokeWidth="strokeWidth" />
     <div class="grid grid-cols-1 grid-rows-1 [&>*]:grid-area">
       <div :class="isDrawing && 'pointer-events-none'" class="z-10 w-min h-min p-4 flex flex-col">
         <p :class="[letterStore.isVowel ? 'text-red' : 'text-blue']" class="flex flex-row gap-2 text-6xl font-bold mb-4">
@@ -24,7 +25,7 @@
         </label>
       </div>
       <div class="w-full h-full grid place-content-center overflow-hidden">
-        <canvas ref="canvas" width="2600" height="1400" class="bg-white place-self-center cursor-crosshair"
+        <canvas ref="canvas" width="2600" height="1400" class="bg-white place-self-center cursor-none"
           @mousedown="startDrawing" @mousemove="draw" @mouseup="stopDrawing"></canvas>
       </div>
     </div>
@@ -42,6 +43,11 @@ const context = ref<CanvasRenderingContext2D | null>(null)
 
 const tool = ref<'brush' | 'bucket'>('brush')
 const imageData = ref<ImageData | null>(null)
+
+const cursorCoords = ref<{ x: number, y: number }>({
+  x: 0,
+  y: 0
+})
 
 const strokeWidth = ref<number>(10)
 const strokeColour = ref<string>('#000000')
@@ -79,9 +85,11 @@ function startDrawing(e: MouseEvent) {
 }
 
 function draw(e: MouseEvent) {
+  cursorCoords.value.x = e.clientX
+  cursorCoords.value.y = e.clientY
+
   if (canvas.value && context.value && isDrawing.value) {
     const [x, y] = getCoords(e)
-
     // Continue drawing line to new coordinates
     context.value.lineTo(x, y)
     context.value.stroke()
