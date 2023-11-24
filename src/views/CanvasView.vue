@@ -18,7 +18,8 @@
         <label v-for="colour in strokeColours" :key="colour" :for="colour" :style="{ backgroundColor: colour }"
           class="w-16 h-16 border-8 border-white grid place-content-center rounded-full cursor-pointer">
           <input v-model="strokeColour" type="radio" :id="colour" :value="colour" class="w-0 h-0 opacity-0 peer">
-          <div class="w-6 bg-white aspect-square rounded-full duration-200 transform scale-0 peer-checked:scale-100">
+          <div
+            class="w-6 bg-white aspect-square rounded-full duration-200 transform scale-0 peer-hover:scale-50 peer-checked:!scale-100">
           </div>
         </label>
       </div>
