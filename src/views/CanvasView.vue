@@ -132,7 +132,7 @@ function floodFill(x: number, y: number, targetColour: string, fillColour: strin
       if (currentX >= 0 && currentX < canvas.value.width && currentY >= 0 && currentY < canvas.value.height) {
         const currentColour = getColour(currentX, currentY)
 
-        if (currentColour === targetColour) {
+        if (checkColours(currentColour, targetColour)) {
           setColour(currentX, currentY, fillColour)
 
           stack.push(
@@ -171,6 +171,17 @@ function getColour(x: number, y: number): string {
   } else {
     return ''
   }
+}
+
+function checkColours(colour1: string, colour2: string) {
+  const [r1, g1, b1] = colour1.match(/\d+/g)!.map(Number);
+  const [r2, g2, b2] = colour2.match(/\d+/g)!.map(Number);
+  const tolerance = 100
+
+  const similarity = Math.abs(r1 - r2) <= tolerance && Math.abs(g1 - g2) <= tolerance && Math.abs(b1 - b2) <= tolerance
+  // const similarity = Math.abs((r1 + g1 + b1) - (r2 + g2 + b2)) <= tolerance
+
+  return similarity
 }
 
 function toRGB(colour: string) {
