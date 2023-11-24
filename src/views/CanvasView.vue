@@ -23,8 +23,8 @@
         </label>
       </div>
       <div class="w-full h-full grid place-content-center overflow-hidden">
-        <canvas ref="canvas" width="2600" height="1400" class="bg-white place-self-center" @mousedown="startDrawing"
-          @mousemove="draw" @mouseup="stopDrawing"></canvas>
+        <canvas ref="canvas" width="2600" height="1400" class="bg-white place-self-center cursor-crosshair"
+          @mousedown="startDrawing" @mousemove="draw" @mouseup="stopDrawing"></canvas>
       </div>
     </div>
   </main>
