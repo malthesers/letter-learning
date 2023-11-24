@@ -1,6 +1,7 @@
 <template>
   <main class="select-none">
-    <StrokeCursor :cursorCoords="cursorCoords" :strokeColour="strokeColour" :strokeWidth="strokeWidth" />
+    <StrokeCursor v-if="showCursor" :cursorCoords="cursorCoords" :strokeColour="strokeColour"
+      :strokeWidth="strokeWidth" />
     <div class="grid grid-cols-1 grid-rows-1 [&>*]:grid-area">
       <div :class="isDrawing && 'pointer-events-none'" class="z-10 w-min h-min p-4 flex flex-col">
         <p :class="[letterStore.isVowel ? 'text-red' : 'text-blue']" class="flex flex-row gap-2 text-6xl font-bold mb-4">
@@ -16,17 +17,19 @@
         </div>
         <button @click="clearDrawing"
           class="w-16 h-16 text-5xl duration-200 hover:-rotate-12 active:scale-90">🗑️</button>
-        <label v-for="colour in strokeColours" :key="colour" :for="colour" :style="{ backgroundColor: colour }"
-          class="w-16 h-16 border-8 border-white grid place-content-center rounded-full cursor-pointer">
-          <input v-model="strokeColour" type="radio" :id="colour" :value="colour" class="w-0 h-0 opacity-0 peer">
-          <div
-            class="w-6 bg-white aspect-square rounded-full duration-200 transform scale-0 peer-hover:scale-50 peer-checked:!scale-100">
-          </div>
-        </label>
+        <div class="w-min">
+          <label v-for="colour in strokeColours" :key="colour" :for="colour" :style="{ backgroundColor: colour }"
+            class="w-16 h-16 border-8 border-white grid place-content-center rounded-full cursor-pointer">
+            <input v-model="strokeColour" type="radio" :id="colour" :value="colour" class="w-0 h-0 opacity-0 peer">
+            <div
+              class="w-6 bg-white aspect-square rounded-full duration-200 transform scale-0 peer-hover:scale-50 peer-checked:!scale-100">
+            </div>
+          </label>
+        </div>
       </div>
       <div class="w-full h-full grid place-content-center overflow-hidden">
         <canvas ref="canvas" width="2600" height="1400" class="bg-white place-self-center cursor-none"
-          @mousedown="startDrawing" @mousemove="draw" @mouseup="stopDrawing"></canvas>
+          @mousedown="startDrawing" @mousemove="draw" @mouseup="stopDrawing" @mouseleave="hideCursor"></canvas>
       </div>
     </div>
   </main>
@@ -44,6 +47,7 @@ const context = ref<CanvasRenderingContext2D | null>(null)
 const tool = ref<'brush' | 'bucket'>('brush')
 const imageData = ref<ImageData | null>(null)
 
+const showCursor = ref<boolean>(false)
 const cursorCoords = ref<{ x: number, y: number }>({
   x: 0,
   y: 0
@@ -85,11 +89,13 @@ function startDrawing(e: MouseEvent) {
 }
 
 function draw(e: MouseEvent) {
+  showCursor.value = true
   cursorCoords.value.x = e.clientX
   cursorCoords.value.y = e.clientY
 
   if (canvas.value && context.value && isDrawing.value) {
     const [x, y] = getCoords(e)
+
     // Continue drawing line to new coordinates
     context.value.lineTo(x, y)
     context.value.stroke()
@@ -200,6 +206,10 @@ function toRGB(colour: string) {
   const { style } = new Option()
   style.color = colour
   return style.color
+}
+
+function hideCursor() {
+  showCursor.value = false
 }
 
 onMounted(() => {
