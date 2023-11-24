@@ -8,8 +8,8 @@
         </p>
         <button @click="tool = 'brush'"
           class="w-16 h-16 text-5xl duration-200 hover:-rotate-12 active:scale-90">🖌️</button>
-        <button @click="tool = 'bucket'"
-          class="w-16 h-16 text-5xl duration-200 hover:-rotate-12 active:scale-90">🎨</button>
+        <!-- <button @click="tool = 'bucket'"
+          class="w-16 h-16 text-5xl duration-200 hover:-rotate-12 active:scale-90">🎨</button> -->
         <button @click="clearDrawing"
           class="w-16 h-16 text-5xl duration-200 hover:-rotate-12 active:scale-90">🗑️</button>
         <label v-for="colour in strokeColours" :key="colour" :for="colour" :style="{ backgroundColor: colour }"
