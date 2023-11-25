@@ -1,6 +1,6 @@
 import type { Letter } from "@/interfaces/Letters";
 
-export const a:Letter = {
+export const p:Letter = {
   value: 'p',
   path: 'p',
   name: 'Name of Character',
