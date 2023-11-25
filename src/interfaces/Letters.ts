@@ -7,4 +7,12 @@ export type Vowel = 'a' | 'e' | 'i' | 'o' | 'u' | 'y' | 'æ' | 'ø' | 'å'
 export interface Letter {
   value: LetterValue,
   path: LetterPath
+  name?: string,
+  images?: Images,
+  sortables?: Array<string>
+}
+
+export interface Images {
+  character: string,
+  background: string,
 }
