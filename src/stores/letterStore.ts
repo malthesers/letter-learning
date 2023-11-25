@@ -1,5 +1,5 @@
-import { allLetters } from '@/data/_index'
 import type { Letter, Consonant, Vowel } from '@/interfaces/Letters'
+import { allLetters } from '@/data/_index'
 import { defineStore } from 'pinia'
 
 export const useLetterStore = defineStore('letterStore', () => {
