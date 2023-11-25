@@ -48,10 +48,7 @@ const tool = ref<'brush' | 'bucket'>('brush')
 const imageData = ref<ImageData | null>(null)
 
 const showCursor = ref<boolean>(false)
-const cursorCoords = ref<{ x: number, y: number }>({
-  x: 0,
-  y: 0
-})
+const cursorCoords = ref<{ x: number, y: number }>({ x: 0, y: 0 })
 
 const strokeWidth = ref<number>(10)
 const strokeColour = ref<string>('#000000')
@@ -129,11 +126,13 @@ function getCoords(e: MouseEvent): number[] {
 
 function fill(e: MouseEvent) {
   if (canvas.value && context.value) {
+    // Get imageData, coordinates, clicked pixel colour and fill colour
     imageData.value = context.value.getImageData(0, 0, canvas.value.width, canvas.value.height)
     const [x, y] = getCoords(e)
     const targetColour = getColour(x, y)
     const fillColour = toRGB(strokeColour.value)
 
+    // Start flood fill if clicked pixel is a different colour then chosen one
     if (targetColour !== fillColour) {
       floodFill(x, y, targetColour, fillColour)
     }
@@ -142,36 +141,47 @@ function fill(e: MouseEvent) {
 
 function floodFill(x: number, y: number, targetColour: string, fillColour: string) {
   if (canvas.value && context.value && imageData.value) {
+    // Array of pixels to check and fill
     const stack: [number, number][] = [[x, y]]
 
+    // Fill pixels as long as array isn't empty
     while (stack.length > 0) {
+      // Set current coordinates
       const [currentX, currentY] = stack.pop() || [0, 0]
 
+      // Proceed if pixels are within canvas
       if (currentX >= 0 && currentX < canvas.value.width && currentY >= 0 && currentY < canvas.value.height) {
+        // Get colour of current pixel
         const currentColour = getColour(currentX, currentY)
 
+        // Proceed if current colour resembles target colour
         if (checkColours(currentColour, targetColour)) {
+          // Set colour of current pixel
           setColour(currentX, currentY, fillColour)
 
+          // Add surrounding 4 pixels to array
           stack.push(
-            [currentX + 1, currentY],
-            [currentX - 1, currentY],
-            [currentX, currentY + 1],
-            [currentX, currentY - 1],
+            [currentX + 1, currentY], // right
+            [currentX - 1, currentY], // left
+            [currentX, currentY + 1], // below
+            [currentX, currentY - 1], // above
           )
         }
       }
     }
 
+    // Update imageData after all pixels are changed
     context.value.putImageData(imageData.value, 0, 0)
   }
 }
 
 function setColour(x: number, y: number, colour: string) {
   if (context.value && imageData.value) {
+    // Get placement of pixel
     const index = (y * imageData.value.width + x) * 4;
     const [r, g, b] = (colour.match(/\d+/g) || []).map(Number)
 
+    // Set colour values 
     imageData.value.data[index] = r
     imageData.value.data[index + 1] = g
     imageData.value.data[index + 2] = b
@@ -181,6 +191,7 @@ function setColour(x: number, y: number, colour: string) {
 
 function getColour(x: number, y: number): string {
   if (imageData.value) {
+    // Get pixel from coordinates and return the rgb values
     const index = (y * imageData.value.width + x) * 4;
     const r = imageData.value.data[index];
     const g = imageData.value.data[index + 1];
@@ -191,18 +202,21 @@ function getColour(x: number, y: number): string {
   }
 }
 
-function checkColours(colour1: string, colour2: string) {
+function checkColours(colour1: string, colour2: string): boolean {
+  // Convert each parameterised colours to array of vlaues
   const [r1, g1, b1] = colour1.match(/\d+/g)!.map(Number);
   const [r2, g2, b2] = colour2.match(/\d+/g)!.map(Number);
   const tolerance = 50
 
+  // Check proximity of colours by tolerance level
   const similarity = Math.abs(r1 - r2) <= tolerance && Math.abs(g1 - g2) <= tolerance && Math.abs(b1 - b2) <= tolerance
   // const similarity = Math.abs((r1 + g1 + b1) - (r2 + g2 + b2)) <= tolerance
 
   return similarity
 }
 
-function toRGB(colour: string) {
+function toRGB(colour: string): string {
+  // Convert colour to rgb string
   const { style } = new Option()
   style.color = colour
   return style.color
