@@ -8,5 +8,5 @@ export const a:Letter = {
     character: 'character-image.png',
     background: 'background-image.png',
   },
-  sortables: ['milk', 'cookies', 'tea', 'cake']
+  sortables: ['ananas', 'mælk', 'småkager', 'and', 'tea', 'cake']
 }
