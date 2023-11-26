@@ -4,6 +4,7 @@
       :strokeWidth="strokeWidth" />
     <div class="grid grid-cols-1 grid-rows-1 [&>*]:grid-area">
       <div :class="isDrawing && 'pointer-events-none'" class="z-10 w-min h-min p-4 flex flex-col">
+        <!-- Letter Display -->
         <p :class="[letterStore.isVowel ? 'text-red' : 'text-blue']" class="flex flex-row gap-2 text-9xl font-bold mb-4">
           <span class="uppercase">{{ letterStore.current?.value }}</span>
           <span class="lowercase">{{ letterStore.current?.value }}</span>
@@ -16,17 +17,22 @@
           <input v-model="strokeWidth" type="range" min="10" max="50" step="10">
         </div>
         <button @click="clearDrawing"
-          class="w-16 h-16 text-5xl duration-200 hover:-rotate-12 active:scale-90">🗑️</button>
-        <div class="w-min">
+          class="w-14 h-16 grid place-content-center duration-200 hover:-rotate-12 active:scale-90">
+          <span class="text-5xl">🗑️</span>
+        </button>
+        <!-- Colour Selector -->
+        <div class="w-min flex flex-col gap-2">
           <label v-for="colour in strokeColours" :key="colour" :for="colour" :style="{ backgroundColor: colour }"
-            class="w-16 h-16 border-8 border-white grid place-content-center rounded-full cursor-pointer">
+            :class="[colour === '#ffffff' ? 'border-white' : 'border-white']"
+            class="w-14 h-14 grid place-content-center shadow-shadow rounded-full cursor-pointer">
             <input v-model="strokeColour" type="radio" :id="colour" :value="colour" class="w-0 h-0 opacity-0 peer">
-            <div
-              class="w-6 bg-white aspect-square rounded-full duration-200 transform scale-0 peer-hover:scale-50 peer-checked:!scale-100">
+            <div :class="[colour === '#ffffff' ? 'bg-black' : 'bg-white']"
+              class="w-6 aspect-square rounded-full duration-200 transform scale-0 peer-hover:scale-50 peer-checked:!scale-100">
             </div>
           </label>
         </div>
       </div>
+      <!-- Canvas -->
       <div class="w-full h-full grid place-content-center overflow-hidden">
         <canvas ref="canvas" width="2600" height="1400" class="bg-white place-self-center cursor-none"
           @mousedown="startDrawing" @mousemove="draw" @mouseup="stopDrawing" @mouseleave="hideCursor"></canvas>
@@ -54,6 +60,7 @@ const strokeWidth = ref<number>(10)
 const strokeColour = ref<string>('#000000')
 const strokeColours = ref<string[]>([
   '#000000',  // black
+  '#ffffff',  // white
   '#4285F6',  // blue
   '#EC4233',  // red
   '#F9BE04',  // yellow
