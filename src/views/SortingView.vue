@@ -1,5 +1,6 @@
 <template>
-  <main>
+  <main :style="{ backgroundImage: `url(/src/assets/background/${letterStore.current?.images.background}.svg)` }"
+    class="bg-cover bg-center">
     <h1 class="text-5xl text-center uppercase">Sorting {{ letterStore.current?.value }}</h1>
     <div class="max-w-6xl h-full mx-auto grid grid-cols-3 p-4">
       <div>
