@@ -6,7 +6,7 @@ export const o:Letter = {
   name: 'Name of Character',
   images: {
     character: 'character-image.png',
-    background: 'background-image.png',
+    background: 'placeholder',
   },
   sortables: ['ananas', 'mælk', 'småkager', 'and', 'tea', 'cake']
 }

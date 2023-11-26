@@ -1,5 +1,6 @@
 <template>
-  <main>
+  <main :style="{ backgroundImage: `url(src/assets/background/${letterStore.current?.images.background}.svg)` }"
+    class="bg-cover bg-center">
     <h1 class="text-5xl text-center uppercase">{{ letterStore.current?.value }}</h1>
     <nav class="text-2xl flex justify-center gap-2">
       <RouterLink :to="route.params.id + '/writing'">Writing</RouterLink>
