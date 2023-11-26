@@ -5,7 +5,7 @@ export const q:Letter = {
   path: 'q',
   name: 'Name of Character',
   images: {
-    character: 'character-image.png',
+    character: 'placeholder',
     background: 'placeholder',
   },
   sortables: ['ananas', 'mælk', 'småkager', 'and', 'tea', 'cake']

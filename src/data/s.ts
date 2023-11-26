@@ -5,7 +5,7 @@ export const s:Letter = {
   path: 's',
   name: 'Name of Character',
   images: {
-    character: 'character-image.png',
+    character: 'placeholder',
     background: 'placeholder',
   },
   sortables: ['ananas', 'mælk', 'småkager', 'and', 'tea', 'cake']
