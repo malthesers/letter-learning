@@ -4,7 +4,7 @@
       :strokeWidth="strokeWidth" />
     <div class="grid grid-cols-1 grid-rows-1 [&>*]:grid-area">
       <div :class="isDrawing && 'pointer-events-none'" class="z-10 w-min h-min p-4 flex flex-col">
-        <p :class="[letterStore.isVowel ? 'text-red' : 'text-blue']" class="flex flex-row gap-2 text-6xl font-bold mb-4">
+        <p :class="[letterStore.isVowel ? 'text-red' : 'text-blue']" class="flex flex-row gap-2 text-9xl font-bold mb-4">
           <span class="uppercase">{{ letterStore.current?.value }}</span>
           <span class="lowercase">{{ letterStore.current?.value }}</span>
         </p>
