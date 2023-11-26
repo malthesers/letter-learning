@@ -35,7 +35,7 @@
       <!-- Canvas -->
       <div class="w-full h-full grid place-content-center overflow-hidden">
         <canvas ref="canvas" width="2600" height="1400" class="bg-white place-self-center cursor-none"
-          @mousedown="startDrawing" @mousemove="draw" @mouseup="stopDrawing" @mouseleave="hideCursor"></canvas>
+          @mousedown="startDrawing" @mousemove="draw" @mouseup="stopDrawing" @mouseleave="showCursor = false"></canvas>
       </div>
     </div>
   </main>
@@ -227,10 +227,6 @@ function toRGB(colour: string): string {
   const { style } = new Option()
   style.color = colour
   return style.color
-}
-
-function hideCursor() {
-  showCursor.value = false
 }
 
 onMounted(() => {
