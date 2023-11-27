@@ -1,6 +1,6 @@
 <template>
   <main :style="{ backgroundImage: `url(/src/assets/background/${letterStore.current?.images.background}.svg)` }"
-    class="h-full px-20 bg-cover bg-center grid grid-cols-[1fr_2fr]">
+    class="h-full px-20 bg-cover bg-center grid grid-cols-[1fr_2fr] gap-4">
     <img :src="`/src/assets/character/${letterStore.current?.images.character}.svg`" :alt="letterStore.current?.name"
       class="max-w-[30rem] h-auto mx-auto mt-auto">
     <div class="w-full h-full mx-auto grid grid-cols-2 grid-rows-3 gap-4 p-4">
