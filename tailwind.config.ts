@@ -10,8 +10,12 @@ module.exports = {
     },
     extend: {
       colors: {
-        'red': '#EC4233',
         'blue': '#4285F6',
+        'red': '#EC4233',
+        'yellow': '#F9BE04',  
+        'green': '#33A955', 
+        'purple': '#AF52DE',  
+        'orange': '#FF9501'   
       }
     }
   },
