@@ -24,7 +24,7 @@
         <div class="w-min flex flex-col gap-2">
           <label v-for="colour in strokeColours" :key="colour" :for="colour" :style="{ backgroundColor: colour }"
             :class="[colour === '#ffffff' ? 'border-white' : 'border-white']"
-            class="w-14 h-14 grid place-content-center shadow-shadow rounded-full cursor-pointer">
+            class="w-14 h-14 grid place-content-center shadow-colour rounded-full cursor-pointer">
             <input v-model="strokeColour" type="radio" :id="colour" :value="colour" class="w-0 h-0 opacity-0 peer">
             <div :class="[colour === '#ffffff' ? 'bg-black' : 'bg-white']"
               class="w-6 aspect-square rounded-full duration-200 transform scale-0 peer-hover:scale-50 peer-checked:!scale-100">
