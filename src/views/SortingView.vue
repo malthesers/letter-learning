@@ -4,29 +4,30 @@
     <img :src="`/src/assets/character/${letterStore.current?.images.character}.svg`" :alt="letterStore.current?.name"
       class="max-w-[30rem] h-auto mx-auto mt-auto">
     <div class="w-full h-full mx-auto grid grid-cols-2 grid-rows-3 gap-4 p-4">
-      <div class="bg-slate-700 bg-opacity-70 p-4 rounded-3xl col-span-2">
+      <div class="flex flex-col bg-slate-700 bg-opacity-70 p-4 rounded-3xl col-span-2">
         <p class="text-4xl text-center mb-4">Ting</p>
-        <draggable v-model="unsortedItems" group="items" item-key="id" class="flex flex-wrap gap-4">
+        <draggable v-model="unsortedItems" group="items" item-key="id"
+          class="grow flex flex-wrap place-content-center gap-4">
           <template #item="{ element }">
-            <span class="text-2xl">{{ element }}</span>
+            <img :src="`/src/assets/sortables/${element}.svg`" :alt="element" class="h-24">
           </template>
         </draggable>
       </div>
       <!-- Correct Container -->
-      <div class="bg-green bg-opacity-70 p-4 row-span-2 rounded-3xl">
+      <div class="flex flex-col bg-green bg-opacity-70 p-4 row-span-2 rounded-3xl">
         <p class="text-4xl text-center mb-4">Gode</p>
-        <draggable v-model="goodItems" group="items" item-key="id" class="h-full">
+        <draggable v-model="goodItems" group="items" item-key="id" class="grow flex flex-wrap place-content-center gap-4">
           <template #item="{ element }">
-            <p class="text-2xl">{{ element }}</p>
+            <img :src="`/src/assets/sortables/${element}.svg`" :alt="element" class="h-24">
           </template>
         </draggable>
       </div>
       <!-- Incorrect Container -->
-      <div class="bg-red bg-opacity-70 p-4 row-span-2 rounded-3xl">
+      <div class="flex flex-col bg-red bg-opacity-70 p-4 row-span-2 rounded-3xl">
         <p class="text-4xl text-center mb-4">Dårlige</p>
-        <draggable v-model="badItems" group="items" item-key="id" class="h-full">
+        <draggable v-model="badItems" group="items" item-key="id" class="grow flex flex-wrap place-content-center gap-4">
           <template #item="{ element }">
-            <p class="text-2xl">{{ element }}</p>
+            <img :src="`/src/assets/sortables/${element}.svg`" :alt="element" class="h-24">
           </template>
         </draggable>
       </div>

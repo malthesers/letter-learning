@@ -8,5 +8,5 @@ export const oe:Letter = {
     character: 'placeholder',
     background: 'placeholder',
   },
-  sortables: ['ananas', 'mælk', 'småkager', 'and', 'tea', 'cake']
+  sortables: ['ananas', 'champignon', 'chili', 'loeg', 'oliven', 'tomat']
 }
