@@ -1,11 +1,12 @@
 <template>
   <TheHeader />
-  <RouterView v-slot="{ Component }">
+  <RouterView v-slot="{ Component, route }">
     <Transition name="page" mode="out-in">
-      <component :is="Component" />
+      <component :is="Component" :key="route.path" />
     </Transition>
   </RouterView>
 </template>
 
 <script setup lang="ts">
+const route = useRoute()
 </script>
