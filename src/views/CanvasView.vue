@@ -1,5 +1,5 @@
 <template>
-  <main class="select-none pt-16">
+  <main class="select-none p-0">
     <StrokeCursor v-if="showCursor" :cursorCoords="cursorCoords" :strokeColour="strokeColour"
       :strokeWidth="strokeWidth" />
     <div class="grid grid-cols-1 grid-rows-1 [&>*]:grid-area">
