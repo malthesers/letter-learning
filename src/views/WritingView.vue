@@ -8,8 +8,8 @@
     <div class="h-full flex flex-col mx-auto p-4 bg-slate-700 bg-opacity-70 rounded-3xl">
       <h1 class="text-5xl text-center">Hjælp {{ letterStore.current?.name }} med at skrive {{ letterStore.current?.value
       }}!</h1>
-      <div class="grow grid place-content-center overflow-hidden">
-        <canvas ref="canvas" width="1000" height="100" class="bg-white place-self-center cursor-none"
+      <div class="grid my-auto overflow-hidden">
+        <canvas ref="canvas" width="1000" height="500" class="place-self-center cursor-none overflow-hidden"
           @mousedown="startDrawing" @mousemove="draw" @mouseup="stopDrawing" @mouseleave="showCursor = false"></canvas>
       </div>
     </div>
@@ -86,7 +86,7 @@ onMounted(() => {
     context.value = canvas.value.getContext('2d', { willReadFrequently: true })
 
     if (context.value) {
-      context.value.fillStyle = 'white';
+      context.value.fillStyle = 'transparent';
       context.value.fillRect(0, 0, canvas.value.width, canvas.value.height);
     }
   }
