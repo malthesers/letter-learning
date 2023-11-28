@@ -5,6 +5,7 @@
       class="max-w-[30rem] h-auto mx-auto mt-auto">
     <div class="w-full h-full mx-auto grid grid-cols-2 grid-rows-3 gap-4 p-4">
       <div class="flex flex-col bg-slate-700 bg-opacity-70 p-4 rounded-3xl col-span-2">
+        <p class="text-4xl text-center mb-4">Hvilke ting kan {{ letterStore.current?.name }} lide?</p>
         <draggable v-model="unsortedItems" group="items" item-key="id" :animation="200"
           class="grow flex flex-wrap place-content-center gap-4">
           <template #item="{ element }">

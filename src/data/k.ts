@@ -3,7 +3,7 @@ import type { Letter } from "@/interfaces/Letters";
 export const k:Letter = {
   value: 'k',
   path: 'k',
-  name: 'Name of Character',
+  name: 'Pizzamageren Pablo',
   images: {
     character: 'placeholder',
     background: 'placeholder',

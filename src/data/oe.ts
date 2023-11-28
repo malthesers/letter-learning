@@ -3,7 +3,7 @@ import type { Letter } from "@/interfaces/Letters";
 export const oe:Letter = {
   value: 'ø',
   path: 'oe',
-  name: 'Name of Character',
+  name: 'Pizzamageren Pablo',
   images: {
     character: 'placeholder',
     background: 'placeholder',

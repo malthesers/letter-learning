@@ -3,7 +3,7 @@ import type { Letter } from "@/interfaces/Letters";
 export const ae:Letter = {
   value: 'æ',
   path: 'ae',
-  name: 'Name of Character',
+  name: 'Pizzamageren Pablo',
   images: {
     character: 'placeholder',
     background: 'placeholder',
