@@ -4,7 +4,7 @@
 
 @layer base {
   main {
-    @apply h-full pt-16 pb-4 px-20;
+    @apply h-full p-20 pb-4;
   }
 
   main a {
