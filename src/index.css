@@ -18,6 +18,8 @@
   }
 }
 
+/* ----- Page Transition ----- */
+
 .page-enter-active,
 .page-leave-active {
   transition: opacity 400ms ease;
@@ -26,4 +28,19 @@
 .page-enter-from,
 .page-leave-to {
   opacity: 0;
+}
+
+/* ----- Sortable Items ----- */
+
+.sortable-chosen > img,
+.sortable-drag > img {
+  transform: scale(1.2) !important;
+}
+
+.sortable-ghost > img {
+  transform: scale(1) !important;
+}
+
+.sortable-ghost {
+  filter: brightness(0.1) !important;
 }
