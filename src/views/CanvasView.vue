@@ -14,7 +14,8 @@
         <!-- <button @click="tool = 'bucket'"
           class="w-16 h-16 text-5xl duration-200 hover:-rotate-12 active:scale-90">🎨</button> -->
         <div>
-          <input v-model="strokeWidth" type="range" min="10" max="50" step="10">
+          <input @input="(e) => strokeWidth = parseInt((e.target as HTMLInputElement).value, 10)" :value="strokeWidth"
+            type="range" min="10" max="50" step="10">
         </div>
         <button @click="clearDrawing"
           class="w-14 h-16 grid place-content-center duration-200 hover:-rotate-12 active:scale-90">
@@ -42,6 +43,7 @@
 </template>
 
 <script setup lang="ts">
+import type { StrokeWidth } from '@/interfaces/Canvas';
 import { useLetterStore } from '@/stores/letterStore';
 
 const letterStore = useLetterStore()
