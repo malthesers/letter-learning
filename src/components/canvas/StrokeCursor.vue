@@ -8,10 +8,7 @@
 </template>
 
 <script setup lang="ts">
-interface CursorCoords {
-  x: number,
-  y: number
-}
+import type { CursorCoords } from '@/interfaces/Canvas';
 
 defineProps<{
   cursorCoords: CursorCoords

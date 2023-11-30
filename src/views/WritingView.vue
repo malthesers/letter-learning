@@ -18,6 +18,7 @@
 </template>
 
 <script setup lang="ts">
+import type { StrokeColour } from '@/interfaces/Canvas';
 import { useLetterStore } from '@/stores/letterStore';
 
 const letterStore = useLetterStore()
@@ -27,7 +28,7 @@ const canvas = ref<HTMLCanvasElement | null>(null)
 const context = ref<CanvasRenderingContext2D | null>(null)
 
 const strokeWidth = ref<number>(10)
-const strokeColour = ref<string>('#000000')
+const strokeColour = ref<StrokeColour>('#000000')
 
 const showCursor = ref<boolean>(false)
 const cursorCoords = ref<{ x: number, y: number }>({ x: 0, y: 0 })

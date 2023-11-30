@@ -9,3 +9,8 @@ export type StrokeColour =
 '#33A955' |  // green
 '#AF52DE' |  // purple
 '#FF9501'    // orange
+
+export interface CursorCoords {
+  x: number,
+  y: number
+}
