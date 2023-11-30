@@ -2,11 +2,7 @@
   <TheHeader />
   <RouterView v-slot="{ Component, route }">
     <Transition name="page" mode="out-in">
-      <component :is="Component" :key="route.path" />
+      <component :is="Component" />
     </Transition>
   </RouterView>
 </template>
-
-<script setup lang="ts">
-const route = useRoute()
-</script>
