@@ -1,6 +1,6 @@
 <template>
   <TheHeader />
-  <RouterView v-slot="{ Component, route }">
+  <RouterView v-slot="{ Component }">
     <Transition name="page" mode="out-in">
       <component :is="Component" />
     </Transition>
