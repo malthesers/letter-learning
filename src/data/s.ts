@@ -1,4 +1,4 @@
-import type { Letter } from "@/interfaces/Letters";
+import type { Letter } from '@/interfaces/Letters';
 
 export const s:Letter = {
   value: 's',

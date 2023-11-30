@@ -1,4 +1,4 @@
-import type { Letter } from "@/interfaces/Letters";
+import type { Letter } from '@/interfaces/Letters';
 
 export const aa:Letter = {
   value: 'å',
