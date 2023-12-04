@@ -5,11 +5,11 @@
       :strokeWidth="strokeWidth" />
     <img :src="`/src/assets/character/${letterStore.current?.images.character}.svg`" :alt="letterStore.current?.name"
       class="max-w-[30rem] h-auto mx-auto mt-auto">
-    <div class="h-full flex flex-col mx-auto p-4 bg-slate-700 bg-opacity-70 rounded-3xl">
-      <h1 class="text-5xl text-center">Hjælp {{ letterStore.current?.name }} med at skrive
+    <div class="h-full flex flex-col mx-auto p-4 bg-slate-300 bg-opacity-70 rounded-3xl">
+      <h1 class="text-5xl text-black text-center">Hjælp {{ letterStore.current?.name }} med at skrive
         <span class="uppercase">{{ letterStore.current?.value }}!</span>
       </h1>
-      <div class="max-h-[60dvh] grid my-auto overflow-hidden">
+      <div class="max-h-[65dvh] grid my-auto overflow-hidden">
         <canvas ref="canvas" width="1000" height="700" class="place-self-center cursor-none overflow-hidden"
           @mousedown="startDrawing" @mousemove="draw" @mouseup="stopDrawing" @mouseleave="showCursor = false"></canvas>
       </div>
