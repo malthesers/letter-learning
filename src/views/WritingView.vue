@@ -13,6 +13,12 @@
         <canvas ref="canvas" width="1000" height="500" class="place-self-center cursor-none overflow-hidden"
           @mousedown="startDrawing" @mousemove="draw" @mouseup="stopDrawing" @mouseleave="showCursor = false"></canvas>
       </div>
+      <div>
+        <button @click="clearDrawing"
+          class="w-14 h-16 grid place-content-center duration-200 hover:-rotate-12 active:scale-90">
+          <span class="text-5xl">🗑️</span>
+        </button>
+      </div>
     </div>
   </main>
 </template>
@@ -68,6 +74,13 @@ function draw(e: MouseEvent) {
   }
 }
 
+function stopDrawing() {
+  if (canvas.value && context.value && isDrawing.value) {
+    // Set drawing boolean to false
+    isDrawing.value = false
+  }
+}
+
 function getCoords(e: MouseEvent): number[] {
   // Return destructured coordinates [x, y]
   return canvas.value ? [
@@ -76,10 +89,10 @@ function getCoords(e: MouseEvent): number[] {
   ] : [0, 0]
 }
 
-function stopDrawing() {
-  if (canvas.value && context.value && isDrawing.value) {
-    // Set drawing boolean to false
-    isDrawing.value = false
+function clearDrawing() {
+  if (canvas.value && context.value) {
+    // Clear canvas
+    context.value.clearRect(0, 0, canvas.value.width, canvas.value.height);
   }
 }
 
