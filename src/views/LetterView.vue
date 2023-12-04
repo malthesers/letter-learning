@@ -7,7 +7,7 @@
       <p class="text-4xl text-center mb-4">{{ letterStore.current?.name }}</p>
       <nav class="w-60 mx-auto text-2xl flex flex-col gap-4">
         <RouterLink :to="route.params.id + '/writing'">Bogstavhuse</RouterLink>
-        <RouterLink :to="route.params.id + '/sorting'">Forbogstav</RouterLink>
+        <RouterLink :to="route.params.id + '/sorting'">Yndlingsting</RouterLink>
         <RouterLink :to="route.params.id + '/canvas'">Tegnetavle</RouterLink>
       </nav>
     </div>
