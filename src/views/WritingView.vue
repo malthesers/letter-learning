@@ -9,8 +9,11 @@
       <h1 class="text-5xl text-black text-center">Hjælp {{ letterStore.current?.name }} med at skrive
         <span class="uppercase">{{ letterStore.current?.value }}!</span>
       </h1>
-      <div class="max-h-[65dvh] grid my-auto overflow-hidden">
-        <canvas ref="canvas" width="1000" height="700" class="place-self-center cursor-none overflow-hidden"
+      <div class="grow grid place-content-center my-auto overflow-hidden">
+        <div>
+          <img src="@/src/assets/handwriting-house.svg" alt="skrivehus">
+        </div>
+        <canvas ref="canvas" width="1000" height="700" class="absolute cursor-none overflow-hidden"
           @mousedown="startDrawing" @mousemove="draw" @mouseup="stopDrawing" @mouseleave="showCursor = false"></canvas>
       </div>
       <div>

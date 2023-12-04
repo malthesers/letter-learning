@@ -2,9 +2,9 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   width="148.42525mm"
-   height="47.20752mm"
-   viewBox="0 0 148.42525 47.20752"
+   width="205.2012mm"
+   height="41.929955mm"
+   viewBox="0 0 205.2012 41.929955"
    version="1.1"
    id="svg1"
    xmlns="http://www.w3.org/2000/svg"
@@ -13,20 +13,22 @@
      id="defs1" />
   <g
      id="layer1"
-     transform="translate(-33.342576,-67.840322)">
+     transform="translate(-2.3994029,-66.844244)">
     <g
-       id="g3">
+       id="g3"
+       transform="matrix(1.3832945,0,0,0.88913076,-40.841982,6.6905701)"
+       style="stroke-width:0.99998;stroke-dasharray:none">
       <path
-         style="fill:#000000;fill-opacity:0;stroke:#000000;stroke-width:0.5;stroke-linejoin:miter;stroke-miterlimit:15.2;stroke-dasharray:none;stroke-opacity:1"
-         d="M 40.157042,114.79784 H 174.95336 V 99.21518 H 40.157042 Z"
+         style="fill:#000000;fill-opacity:0;stroke:#000000;stroke-width:0.450848;stroke-linejoin:miter;stroke-miterlimit:15.2;stroke-dasharray:none;stroke-opacity:1"
+         d="M 38.03274,114.58742 H 172.82906 V 99.004763 H 38.03274 Z"
          id="path2" />
       <path
-         style="fill:#000000;fill-opacity:0;stroke:#000000;stroke-width:0.5;stroke-linejoin:miter;stroke-miterlimit:15.2;stroke-dasharray:none;stroke-opacity:1"
-         d="M 40.157042,99.21518 H 174.95336 V 83.632521 H 40.157042 Z"
+         style="fill:#000000;fill-opacity:0;stroke:#000000;stroke-width:0.450848;stroke-linejoin:miter;stroke-miterlimit:15.2;stroke-dasharray:none;stroke-opacity:1"
+         d="M 38.03274,99.004763 H 172.82906 V 83.422104 H 38.03274 Z"
          id="path2-0" />
       <path
-         d="m 42.258157,68.090317 -8.494055,15.542204 h 8.494055 130.594093 8.49405 l -8.49405,-15.542204 z"
-         style="fill-opacity:0;stroke:#000000;stroke-width:0.5;stroke-miterlimit:15.2;stroke-dasharray:none"
+         d="M 40.133855,67.8799 31.6398,83.422104 H 40.133855 170.72795 179.222 L 170.72795,67.8799 Z"
+         style="fill-opacity:0;stroke:#000000;stroke-width:0.450848;stroke-miterlimit:15.2;stroke-dasharray:none"
          id="path3" />
     </g>
   </g>
