@@ -14,8 +14,7 @@
           @mousedown="startDrawing" @mousemove="draw" @mouseup="stopDrawing" @mouseleave="showCursor = false"></canvas>
       </div>
       <div>
-        <button @click="clearDrawing"
-          class="w-14 h-16 grid place-content-center duration-200 hover:-rotate-12 active:scale-90">
+        <button @click="clearDrawing" class="grid place-content-center duration-200 hover:-rotate-12 active:scale-90">
           <span class="text-5xl">🗑️</span>
         </button>
       </div>
