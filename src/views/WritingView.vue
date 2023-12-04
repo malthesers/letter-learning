@@ -1,6 +1,6 @@
 <template>
   <main :style="{ backgroundImage: `url(/src/assets/background/${letterStore.current?.images.background}.svg)` }"
-    class="h-full px-20 bg-cover bg-center grid grid-cols-[1fr_2fr] gap-4">
+    class="h-full px-20 bg-cover bg-center grid grid-cols-[1fr_3fr] gap-4">
     <StrokeCursor v-if="showCursor" :cursorCoords="cursorCoords" :strokeColour="strokeColour"
       :strokeWidth="strokeWidth" />
     <img :src="`/src/assets/character/${letterStore.current?.images.character}.svg`" :alt="letterStore.current?.name"
@@ -9,12 +9,13 @@
       <h1 class="text-5xl text-black text-center">Hjælp {{ letterStore.current?.name }} med at skrive
         <span class="uppercase">{{ letterStore.current?.value }}!</span>
       </h1>
-      <div class="grow grid place-content-center my-auto overflow-hidden">
-        <div>
-          <img src="@/src/assets/handwriting-house.svg" alt="skrivehus">
-        </div>
-        <canvas ref="canvas" width="1000" height="700" class="absolute cursor-none overflow-hidden"
+      <div class="max-h-[60dvh] grid grid-rows-1 grid-cols-1 [&>*]:grid-area my-auto overflow-hidden">
+        <canvas ref="canvas" width="1000" height="700" class="place-self-center cursor-none overflow-hidden"
           @mousedown="startDrawing" @mousemove="draw" @mouseup="stopDrawing" @mouseleave="showCursor = false"></canvas>
+        <div class="grid place-content-center gap-8 pointer-events-none">
+          <img src="@/src/assets/handwriting-house.svg" alt="skrivehus for store bogstaver">
+          <img src="@/src/assets/handwriting-house.svg" alt="skrivehus for små bogstaver">
+        </div>
       </div>
       <div>
         <button @click="clearDrawing" class="grid place-content-center duration-200 hover:-rotate-12 active:scale-90">
