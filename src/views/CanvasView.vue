@@ -2,7 +2,7 @@
   <main class="select-none p-0">
     <StrokeCursor v-if="showCursor" :cursorCoords="cursorCoords" :strokeColour="strokeColour"
       :strokeWidth="strokeWidth" />
-    <div class="grid grid-cols-1 grid-rows-1 [&>*]:grid-area">
+    <div class="grid grid-cols-1 grid-rows-1 [&>*]:grid-center">
       <div :class="[isDrawing ? '[&>*]:pointer-events-none' : '[&>*]:pointer-events-auto']"
         class="z-10 w-min h-min p-4 flex flex-col pt-16 pointer-events-none">
         <!-- Letter Display -->

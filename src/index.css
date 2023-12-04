@@ -13,7 +13,7 @@
 }
 
 @layer utilities {
-  .grid-area {
+  .grid-center {
     grid-area: 1 / 1 / 1 / 1;
   }
 }
