@@ -13,8 +13,8 @@
         <canvas ref="canvas" width="1000" height="700" class="place-self-center cursor-none overflow-hidden"
           @mousedown="startDrawing" @mousemove="draw" @mouseup="stopDrawing" @mouseleave="showCursor = false"></canvas>
         <div class="grid place-content-center gap-8 pointer-events-none">
-          <img src="@/src/assets/handwriting-house.svg" alt="skrivehus for store bogstaver">
-          <img src="@/src/assets/handwriting-house.svg" alt="skrivehus for små bogstaver">
+          <img src="@/src/assets/handwriting-house.svg" alt="bogstavhuse for store bogstaver">
+          <img src="@/src/assets/handwriting-house.svg" alt="bogstavhuse for små bogstaver">
         </div>
       </div>
       <div>
