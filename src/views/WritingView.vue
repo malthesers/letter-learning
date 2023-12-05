@@ -17,10 +17,17 @@
           <img class="w-full" src="@/src/assets/handwriting-house.svg" alt="bogstavhuse for små bogstaver">
         </div>
       </div>
-      <div>
+      <div class="flex flex-row gap-4">
         <button @click="clearDrawing" class="grid place-content-center duration-200 hover:-rotate-12 active:scale-90">
           <span class="text-5xl">🗑️</span>
         </button>
+        <label v-for="colour in strokeColours" :key="colour" :for="colour" :style="{ backgroundColor: colour }"
+          class="w-14 h-14 grid place-content-center shadow-colour rounded-full cursor-pointer">
+          <input v-model="strokeColour" type="radio" :id="colour" :value="colour" class="w-0 h-0 opacity-0 peer">
+          <div
+            class="w-6 aspect-square bg-white rounded-full duration-200 transform scale-0 peer-hover:scale-50 peer-checked:!scale-100">
+          </div>
+        </label>
       </div>
     </div>
   </main>
@@ -36,11 +43,17 @@ const isDrawing = ref<boolean>(false)
 const canvas = ref<HTMLCanvasElement | null>(null)
 const context = ref<CanvasRenderingContext2D | null>(null)
 
-const strokeWidth = ref<number>(10)
-const strokeColour = ref<StrokeColour>('#000000')
-
 const showCursor = ref<boolean>(false)
 const cursorCoords = ref<{ x: number, y: number }>({ x: 0, y: 0 })
+
+const strokeWidth = ref<number>(10)
+const strokeColour = ref<StrokeColour>('#000000')
+const strokeColours = ref<StrokeColour[]>([
+  '#000000',  // black
+  '#4285F6',  // blue
+  '#EC4233',  // red
+])
+
 
 function startDrawing(e: MouseEvent) {
   if (canvas.value && context.value) {
