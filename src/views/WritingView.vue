@@ -3,8 +3,16 @@
     class="h-full px-20 bg-cover bg-center grid grid-cols-[1fr_3fr] gap-4">
     <StrokeCursor v-if="showCursor" :cursorCoords="cursorCoords" :strokeColour="strokeColour"
       :strokeWidth="strokeWidth" />
-    <img :src="`/src/assets/character/${letterStore.current?.images.character}.svg`" :alt="letterStore.current?.name"
-      class="max-w-[30rem] h-auto mx-auto mt-auto">
+    <div class="flex flex-col">
+      <div class="grow grid place-content-center">
+        <p class="flex flex-row gap-2 place-content-center text-[10rem] font-bold">
+          <span class="uppercase">{{ letterStore.current?.value }}</span>
+          <span class="lowercase">{{ letterStore.current?.value }}</span>
+        </p>
+      </div>
+      <img :src="`/src/assets/character/${letterStore.current?.images.character}.svg`" :alt="letterStore.current?.name"
+        class="max-w-[30rem] h-auto mx-auto">
+    </div>
     <div class="h-full flex flex-col mx-auto p-4 bg-slate-300 bg-opacity-70 rounded-3xl">
       <h1 class="text-5xl text-black text-center">Hjælp {{ letterStore.current?.name }} med at skrive
         <span class="uppercase">{{ letterStore.current?.value }}!</span>
