@@ -12,9 +12,9 @@
       <div class="max-h-[60dvh] grid grid-rows-1 grid-cols-1 [&>*]:grid-center my-auto overflow-hidden">
         <canvas ref="canvas" width="1000" height="700" class="place-self-center cursor-none overflow-hidden"
           @mousedown="startDrawing" @mousemove="draw" @mouseup="stopDrawing" @mouseleave="showCursor = false"></canvas>
-        <div class="grid place-content-center gap-8 pointer-events-none">
-          <img src="@/src/assets/handwriting-house.svg" alt="bogstavhuse for store bogstaver">
-          <img src="@/src/assets/handwriting-house.svg" alt="bogstavhuse for små bogstaver">
+        <div class="grid gap-8 content-center pointer-events-none">
+          <img class="w-full" src="@/src/assets/handwriting-house.svg" alt="bogstavhuse for store bogstaver">
+          <img class="w-full" src="@/src/assets/handwriting-house.svg" alt="bogstavhuse for små bogstaver">
         </div>
       </div>
       <div>
