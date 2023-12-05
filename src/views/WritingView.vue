@@ -6,7 +6,7 @@
     <div class="flex flex-col">
       <div class="grow grid place-content-center">
         <p :style="{ color: strokeColour }"
-          class="flex flex-row gap-2 place-content-center text-[10rem] font-bold duration-500">
+          class="flex flex-row gap-2 place-content-center text-9xl font-bold duration-500">
           <span class="uppercase">{{ letterStore.current?.value }}</span>
           <span class="lowercase">{{ letterStore.current?.value }}</span>
         </p>
