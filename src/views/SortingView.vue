@@ -10,7 +10,7 @@
     />
     <div class="w-full h-full mx-auto flex flex-col gap-4 p-4">
       <div class="h-60 flex flex-col bg-slate-700 bg-opacity-70 p-4 rounded-3xl col-span-2">
-        <p class="text-4xl text-center mb-4">Hvilke ting kan {{ letterStore.current?.name }} lide?</p>
+        <p class="text-4xl text-center text-balance mb-4">Hvilke ting kan {{ letterStore.current?.name }} lide?</p>
         <draggable
           v-model="unsortedItems"
           group="items"

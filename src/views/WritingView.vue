@@ -14,8 +14,8 @@
       <img :src="`/src/assets/character/${letterStore.current?.images.character}.svg`" :alt="letterStore.current?.name" class="max-w-[30rem] h-auto mx-auto" />
     </div>
     <div class="h-full flex flex-col mx-auto p-4 bg-slate-300 bg-opacity-70 rounded-3xl">
-      <h1 class="text-5xl text-black text-center">
-        Hjælp {{ letterStore.current?.name }} med at skrive
+      <h1 class="text-5xl text-black text-center text-balance">
+        <span>Hjælp {{ letterStore.current?.name }} med at skrive </span>
         <span class="uppercase">{{ letterStore.current?.value }}!</span>
       </h1>
       <div class="max-h-[60dvh] grid grid-rows-1 grid-cols-1 *:grid-center my-auto overflow-hidden">
