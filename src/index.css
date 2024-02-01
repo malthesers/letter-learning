@@ -12,12 +12,6 @@
   }
 }
 
-@layer utilities {
-  .grid-center {
-    grid-area: 1 / 1 / 1 / 1;
-  }
-}
-
 /* ----- Page Transition ----- */
 
 .page-enter-active,

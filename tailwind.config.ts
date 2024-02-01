@@ -1,4 +1,7 @@
+import { PluginAPI } from 'tailwindcss/types/config'
+
 /** @type {import('tailwindcss').Config} */
+
 module.exports = {
   content: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
   theme: {
@@ -10,14 +13,22 @@ module.exports = {
     },
     extend: {
       colors: {
-        'blue': '#4285F6',
-        'red': '#EC4233',
-        'yellow': '#F9BE04',  
-        'green': '#33A955', 
-        'purple': '#AF52DE',  
-        'orange': '#FF9501'   
+        blue: '#4285F6',
+        red: '#EC4233',
+        yellow: '#F9BE04',
+        green: '#33A955',
+        purple: '#AF52DE',
+        orange: '#FF9501'
       }
     }
   },
-  plugins: []
+  plugins: [
+    ({ addUtilities }: PluginAPI) => {
+      addUtilities({
+        '.grid-center': {
+          'grid-area': '1 / 1 / 1 / 1'
+        }
+      })
+    }
+  ]
 }
