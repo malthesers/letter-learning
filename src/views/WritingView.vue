@@ -18,7 +18,7 @@
         Hjælp {{ letterStore.current?.name }} med at skrive
         <span class="uppercase">{{ letterStore.current?.value }}!</span>
       </h1>
-      <div class="max-h-[60dvh] grid grid-rows-1 grid-cols-1 [&>*]:grid-center my-auto overflow-hidden">
+      <div class="max-h-[60dvh] grid grid-rows-1 grid-cols-1 *:grid-center my-auto overflow-hidden">
         <div class="grid gap-8 content-center pointer-events-none">
           <img class="w-full" src="@/assets/handwriting-house.svg" alt="bogstavhuse for store bogstaver" />
           <img class="w-full" src="@/assets/handwriting-house.svg" alt="bogstavhuse for små bogstaver" />
