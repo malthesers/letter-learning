@@ -2,19 +2,16 @@
   <main class="select-none p-0">
     <StrokeCursor v-if="showCursor" :cursorCoords="cursorCoords" :strokeColour="strokeColour" :strokeWidth="strokeWidth" />
     <div class="grid grid-cols-1 grid-rows-1 [&>*]:grid-center">
-      <div
-        :class="[isDrawing ? '[&>*]:pointer-events-none' : '[&>*]:pointer-events-auto']"
-        class="z-10 w-min h-min p-4 flex flex-col pt-16 pointer-events-none"
-      >
+      <div :class="[isDrawing ? '[&>*]:pointer-events-none' : '[&>*]:pointer-events-auto']" class="z-10 size-min p-4 flex flex-col pt-16 pointer-events-none">
         <!-- Letter Display -->
         <p :class="[letterStore.isVowel ? 'text-red' : 'text-blue']" class="flex flex-row gap-2 text-9xl font-bold mb-4">
           <span class="uppercase">{{ letterStore.current?.value }}</span>
           <span class="lowercase">{{ letterStore.current?.value }}</span>
         </p>
         <!-- <button @click="tool = 'brush'"
-          class="w-16 h-16 text-5xl duration-200 hover:-rotate-12 active:scale-90">🖌️</button> -->
+          class="size-16 text-5xl duration-200 hover:-rotate-12 active:scale-90">🖌️</button> -->
         <!-- <button @click="tool = 'bucket'"
-          class="w-16 h-16 text-5xl duration-200 hover:-rotate-12 active:scale-90">🎨</button> -->
+          class="size-16 text-5xl duration-200 hover:-rotate-12 active:scale-90">🎨</button> -->
         <div>
           <input
             @input="(e) => (strokeWidth = parseInt((e.target as HTMLInputElement).value, 10))"
@@ -35,9 +32,9 @@
             :key="colour"
             :for="colour"
             :style="{ backgroundColor: colour }"
-            class="w-14 h-14 grid place-content-center shadow-colour rounded-full cursor-pointer"
+            class="size-14 grid place-content-center shadow-colour rounded-full cursor-pointer"
           >
-            <input v-model="strokeColour" type="radio" :id="colour" :value="colour" class="w-0 h-0 opacity-0 peer" />
+            <input v-model="strokeColour" type="radio" :id="colour" :value="colour" class="size-0 opacity-0 peer" />
             <div
               :class="[colour === '#ffffff' ? 'bg-black' : 'bg-white']"
               class="w-6 aspect-square rounded-full duration-200 transform scale-0 peer-hover:scale-50 peer-checked:!scale-100"
@@ -46,7 +43,7 @@
         </div>
       </div>
       <!-- Canvas -->
-      <div class="w-full h-full grid place-content-center overflow-hidden">
+      <div class="size-full grid place-content-center overflow-hidden">
         <canvas
           ref="canvas"
           width="2600"
