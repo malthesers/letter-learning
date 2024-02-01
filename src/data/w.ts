@@ -1,12 +1,12 @@
-import type { Letter } from '@/interfaces/Letters';
+import type { Letter } from '@/interfaces/Letters'
 
-export const w:Letter = {
+export const w: Letter = {
   value: 'w',
   path: 'w',
   name: 'Pizzamageren Pablo',
   images: {
     character: 'placeholder',
-    background: 'placeholder',
+    background: 'placeholder'
   },
   sortables: ['ananas', 'champignon', 'chili', 'loeg', 'oliven', 'tomat']
 }

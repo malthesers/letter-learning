@@ -1,10 +1,11 @@
 <template>
   <main class="select-none p-0">
-    <StrokeCursor v-if="showCursor" :cursorCoords="cursorCoords" :strokeColour="strokeColour"
-      :strokeWidth="strokeWidth" />
+    <StrokeCursor v-if="showCursor" :cursorCoords="cursorCoords" :strokeColour="strokeColour" :strokeWidth="strokeWidth" />
     <div class="grid grid-cols-1 grid-rows-1 [&>*]:grid-center">
-      <div :class="[isDrawing ? '[&>*]:pointer-events-none' : '[&>*]:pointer-events-auto']"
-        class="z-10 w-min h-min p-4 flex flex-col pt-16 pointer-events-none">
+      <div
+        :class="[isDrawing ? '[&>*]:pointer-events-none' : '[&>*]:pointer-events-auto']"
+        class="z-10 w-min h-min p-4 flex flex-col pt-16 pointer-events-none"
+      >
         <!-- Letter Display -->
         <p :class="[letterStore.isVowel ? 'text-red' : 'text-blue']" class="flex flex-row gap-2 text-9xl font-bold mb-4">
           <span class="uppercase">{{ letterStore.current?.value }}</span>
@@ -15,36 +16,55 @@
         <!-- <button @click="tool = 'bucket'"
           class="w-16 h-16 text-5xl duration-200 hover:-rotate-12 active:scale-90">🎨</button> -->
         <div>
-          <input @input="(e) => strokeWidth = parseInt((e.target as HTMLInputElement).value, 10)" :value="strokeWidth"
-            type="range" min="10" max="50" step="10">
+          <input
+            @input="(e) => (strokeWidth = parseInt((e.target as HTMLInputElement).value, 10))"
+            :value="strokeWidth"
+            type="range"
+            min="10"
+            max="50"
+            step="10"
+          />
         </div>
-        <button @click="clearDrawing"
-          class="w-14 h-16 grid place-content-center duration-200 hover:-rotate-12 active:scale-90">
+        <button @click="clearDrawing" class="w-14 h-16 grid place-content-center duration-200 hover:-rotate-12 active:scale-90">
           <span class="text-5xl">🗑️</span>
         </button>
         <!-- Colour Selector -->
         <div class="w-min flex flex-col gap-2">
-          <label v-for="colour in strokeColours" :key="colour" :for="colour" :style="{ backgroundColor: colour }"
-            class="w-14 h-14 grid place-content-center shadow-colour rounded-full cursor-pointer">
-            <input v-model="strokeColour" type="radio" :id="colour" :value="colour" class="w-0 h-0 opacity-0 peer">
-            <div :class="[colour === '#ffffff' ? 'bg-black' : 'bg-white']"
-              class="w-6 aspect-square rounded-full duration-200 transform scale-0 peer-hover:scale-50 peer-checked:!scale-100">
-            </div>
+          <label
+            v-for="colour in strokeColours"
+            :key="colour"
+            :for="colour"
+            :style="{ backgroundColor: colour }"
+            class="w-14 h-14 grid place-content-center shadow-colour rounded-full cursor-pointer"
+          >
+            <input v-model="strokeColour" type="radio" :id="colour" :value="colour" class="w-0 h-0 opacity-0 peer" />
+            <div
+              :class="[colour === '#ffffff' ? 'bg-black' : 'bg-white']"
+              class="w-6 aspect-square rounded-full duration-200 transform scale-0 peer-hover:scale-50 peer-checked:!scale-100"
+            ></div>
           </label>
         </div>
       </div>
       <!-- Canvas -->
       <div class="w-full h-full grid place-content-center overflow-hidden">
-        <canvas ref="canvas" width="2600" height="1400" class="bg-white place-self-center cursor-none"
-          @mousedown="startDrawing" @mousemove="draw" @mouseup="stopDrawing" @mouseleave="showCursor = false"></canvas>
+        <canvas
+          ref="canvas"
+          width="2600"
+          height="1400"
+          class="bg-white place-self-center cursor-none"
+          @mousedown="startDrawing"
+          @mousemove="draw"
+          @mouseup="stopDrawing"
+          @mouseleave="showCursor = false"
+        ></canvas>
       </div>
     </div>
   </main>
 </template>
 
 <script setup lang="ts">
-import type { StrokeColour } from '@/interfaces/Canvas';
-import { useLetterStore } from '@/stores/letterStore';
+import type { StrokeColour } from '@/interfaces/Canvas'
+import { useLetterStore } from '@/stores/letterStore'
 
 const letterStore = useLetterStore()
 
@@ -56,24 +76,23 @@ const tool = ref<'brush' | 'bucket'>('brush')
 const imageData = ref<ImageData | null>(null)
 
 const showCursor = ref<boolean>(false)
-const cursorCoords = ref<{ x: number, y: number }>({ x: 0, y: 0 })
+const cursorCoords = ref<{ x: number; y: number }>({ x: 0, y: 0 })
 
 const strokeWidth = ref<number>(10)
 const strokeColour = ref<StrokeColour>('#000000')
 const strokeColours = ref<StrokeColour[]>([
-  '#000000',  // black
-  '#ffffff',  // white
-  '#4285F6',  // blue
-  '#EC4233',  // red
-  '#F9BE04',  // yellow
-  '#33A955',  // green
-  '#AF52DE',  // purple
-  '#FF9501'   // orange
+  '#000000', // black
+  '#ffffff', // white
+  '#4285F6', // blue
+  '#EC4233', // red
+  '#F9BE04', // yellow
+  '#33A955', // green
+  '#AF52DE', // purple
+  '#FF9501' // orange
 ])
 
 function startDrawing(e: MouseEvent) {
   if (canvas.value && context.value && tool.value === 'brush') {
-
     // Set drawing boolean to true
     isDrawing.value = true
 
@@ -120,17 +139,14 @@ function stopDrawing() {
 function clearDrawing() {
   if (canvas.value && context.value) {
     // Clear canvas
-    context.value.fillStyle = 'white';
-    context.value.fillRect(0, 0, canvas.value.width, canvas.value.height);
+    context.value.fillStyle = 'white'
+    context.value.fillRect(0, 0, canvas.value.width, canvas.value.height)
   }
 }
 
 function getCoords(e: MouseEvent): number[] {
   // Return destructured coordinates [x, y]
-  return canvas.value ? [
-    e.clientX - canvas.value.offsetLeft,
-    e.clientY - canvas.value.offsetTop
-  ] : [0, 0]
+  return canvas.value ? [e.clientX - canvas.value.offsetLeft, e.clientY - canvas.value.offsetTop] : [0, 0]
 }
 
 function fill(e: MouseEvent) {
@@ -173,7 +189,7 @@ function floodFill(x: number, y: number, targetColour: string, fillColour: strin
             [currentX + 1, currentY], // right
             [currentX - 1, currentY], // left
             [currentX, currentY + 1], // below
-            [currentX, currentY - 1], // above
+            [currentX, currentY - 1] // above
           )
         }
       }
@@ -187,10 +203,10 @@ function floodFill(x: number, y: number, targetColour: string, fillColour: strin
 function setColour(x: number, y: number, colour: string) {
   if (context.value && imageData.value) {
     // Get placement of pixel
-    const index = (y * imageData.value.width + x) * 4;
+    const index = (y * imageData.value.width + x) * 4
     const [r, g, b] = (colour.match(/\d+/g) || []).map(Number)
 
-    // Set colour values 
+    // Set colour values
     imageData.value.data[index] = r
     imageData.value.data[index + 1] = g
     imageData.value.data[index + 2] = b
@@ -201,11 +217,11 @@ function setColour(x: number, y: number, colour: string) {
 function getColour(x: number, y: number): string {
   if (imageData.value) {
     // Get pixel from coordinates and return the rgb values
-    const index = (y * imageData.value.width + x) * 4;
-    const r = imageData.value.data[index];
-    const g = imageData.value.data[index + 1];
-    const b = imageData.value.data[index + 2];
-    return `rgb(${r}, ${g}, ${b})`;
+    const index = (y * imageData.value.width + x) * 4
+    const r = imageData.value.data[index]
+    const g = imageData.value.data[index + 1]
+    const b = imageData.value.data[index + 2]
+    return `rgb(${r}, ${g}, ${b})`
   } else {
     return ''
   }
@@ -213,8 +229,8 @@ function getColour(x: number, y: number): string {
 
 function checkColours(colour1: string, colour2: string): boolean {
   // Convert each parameterised colours to array of vlaues
-  const [r1, g1, b1] = colour1.match(/\d+/g)!.map(Number);
-  const [r2, g2, b2] = colour2.match(/\d+/g)!.map(Number);
+  const [r1, g1, b1] = colour1.match(/\d+/g)!.map(Number)
+  const [r2, g2, b2] = colour2.match(/\d+/g)!.map(Number)
   const tolerance = 50
 
   // Check proximity of colours by tolerance level
@@ -236,8 +252,8 @@ onMounted(() => {
     context.value = canvas.value.getContext('2d', { willReadFrequently: true })
 
     if (context.value) {
-      context.value.fillStyle = 'white';
-      context.value.fillRect(0, 0, canvas.value.width, canvas.value.height);
+      context.value.fillStyle = 'white'
+      context.value.fillRect(0, 0, canvas.value.width, canvas.value.height)
     }
   }
 })

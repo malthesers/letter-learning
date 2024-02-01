@@ -5,14 +5,14 @@ export type Consonant = 'b' | 'c' | 'd' | 'f' | 'g' | 'h' | 'j' | 'k' | 'l' | 'm
 export type Vowel = 'a' | 'e' | 'i' | 'o' | 'u' | 'y' | 'æ' | 'ø' | 'å'
 
 export interface Letter {
-  value: LetterValue,
+  value: LetterValue
   path: LetterPath
-  name: string,
-  images: Images,
+  name: string
+  images: Images
   sortables: Array<string>
 }
 
 export interface Images {
-  character: string,
-  background: string,
+  character: string
+  background: string
 }
